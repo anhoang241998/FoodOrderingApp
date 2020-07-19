@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Food Ordering App</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title">Vietnam Food</string>
+    <string name="hint">Search...</string>
+    <string name="tv_string">Popular this Week</string>
+    <string name="tv_error">An Error occured while loading data</string>
+    <string name="food">FRESH FOOD</string>
+    <string name="delivery">FAST DELIVERY</string>
+    <string name="payment">EASY PAYMENT</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</string>
+    <string name="btn_next">Next</string>
+    <string name="btn_finish">Finish</string>
+
+</resources>
