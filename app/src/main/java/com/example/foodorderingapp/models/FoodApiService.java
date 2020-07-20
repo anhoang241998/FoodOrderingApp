@@ -11,20 +11,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FoodApiService {
 
-    private FoodApi api;
+    private static Retrofit retrofit;
     public static final String BASE_URL = "https://androidappsforyoutube.s3.ap-south-1.amazonaws.com/foodapp/";
 
 
-    public FoodApiService() {
-        api = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(FoodApi.class);
+    public static Retrofit getRetrofitInstance(){
+        if(retrofit == null){
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
     }
 
-    public Call<List<FoodData>> getFoods() {
-        return api.getAllData();
-    }
 
 }

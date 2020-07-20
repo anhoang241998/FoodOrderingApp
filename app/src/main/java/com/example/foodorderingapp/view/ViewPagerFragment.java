@@ -51,6 +51,9 @@ public class ViewPagerFragment extends Fragment {
                 requireActivity().getSupportFragmentManager(),
                 getLifecycle(),
                 fragmentList);
+
+
+
         ButterKnife.bind(this,view);
         return view;
     }

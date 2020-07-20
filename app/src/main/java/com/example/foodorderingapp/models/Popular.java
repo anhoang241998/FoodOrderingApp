@@ -28,6 +28,8 @@ public class Popular {
     @Expose
     private String note;
 
+
+
     public String getName() {
         return name;
     }
