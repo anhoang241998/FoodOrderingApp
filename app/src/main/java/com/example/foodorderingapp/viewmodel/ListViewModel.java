@@ -6,20 +6,16 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.foodorderingapp.adapter.PopularAdapter;
 import com.example.foodorderingapp.models.FoodApi;
 import com.example.foodorderingapp.models.FoodApiService;
 import com.example.foodorderingapp.models.FoodData;
 import com.example.foodorderingapp.models.Popular;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.disposables.CompositeDisposable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class ListViewModel extends AndroidViewModel {
 
@@ -27,8 +23,6 @@ public class ListViewModel extends AndroidViewModel {
     public MutableLiveData<Boolean> foodLoadError = new MutableLiveData<Boolean>();
     public MutableLiveData<Boolean> loading = new MutableLiveData<Boolean>();
 
-    private PopularAdapter mPopularAdapter;
-    private List<Popular> list = new ArrayList<>();
     private FoodApi apiInterface;
 
     public ListViewModel(@NonNull Application application) {
@@ -50,6 +44,8 @@ public class ListViewModel extends AndroidViewModel {
             public void onResponse(Call<List<FoodData>> call, Response<List<FoodData>> response) {
                 List<FoodData> foodData = response.body();
                 foodsRetrieved(foodData.get(0).getPopular());
+
+
             }
 
             @Override
@@ -71,7 +67,6 @@ public class ListViewModel extends AndroidViewModel {
         foodLoadError.setValue(true);
         loading.setValue(false);
     }
-
 
 
 }

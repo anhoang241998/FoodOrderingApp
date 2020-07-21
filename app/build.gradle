@@ -45,6 +45,7 @@ dependencies {
     def navVersion = '2.1.0-alpha05'
     def preferencesVersion = '1.0.0'
     def sdpLibrary = '1.0.6'
+    def simpleSearchView = '0.1.5'
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -99,5 +100,9 @@ dependencies {
 
     // sdp
     implementation "com.intuit.sdp:sdp-android:$sdpLibrary"
+
+    //SimpleSearchView
+    implementation "com.github.Ferfalk:SimpleSearchView:$simpleSearchView"
+
 
 }

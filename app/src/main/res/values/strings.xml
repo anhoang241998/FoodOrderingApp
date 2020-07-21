@@ -12,5 +12,6 @@
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</string>
     <string name="btn_next">Next</string>
     <string name="btn_finish">Finish</string>
+    <string name="app_subtitle">abc</string>
 
 </resources>
