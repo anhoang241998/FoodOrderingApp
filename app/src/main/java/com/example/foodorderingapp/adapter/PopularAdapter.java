@@ -1,6 +1,5 @@
 package com.example.foodorderingapp.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodorderingapp.R;
 import com.example.foodorderingapp.models.Popular;
-import com.example.foodorderingapp.util.Util;
+import com.example.foodorderingapp.util.GlideUtil;
 
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
     @Override
     public void onBindViewHolder(@NonNull PopularViewHolder holder, int position) {
         holder.popularName.setText(mPopularList.get(position).getName());
-        Util.loadImages(holder.popularImage, mPopularList.get(position).getImageUrl(), Util.getCircularProgressDrawable(holder.popularImage.getContext()));
+        GlideUtil.loadImages(holder.popularImage, mPopularList.get(position).getImageUrl(), GlideUtil.getCircularProgressDrawable(holder.popularImage.getContext()));
 
     }
 

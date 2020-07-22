@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.foodorderingapp.R;
 
-public class Util {
+public class GlideUtil {
 
     public static void loadImages(ImageView imageView, String url, CircularProgressDrawable progressDrawable) {
         RequestOptions options = new RequestOptions()
