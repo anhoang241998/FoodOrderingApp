@@ -19,5 +19,6 @@
     <string name="tv_delivery_type">Free Delivery</string>
     <string name="tv_recommended_price">160</string>
     <string name="tv_rating">4.5</string>
+    <string name="tv_all_menu">All Menu Items</string>
 
 </resources>

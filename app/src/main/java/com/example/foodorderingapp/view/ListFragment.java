@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodorderingapp.R;
+import com.example.foodorderingapp.adapters.AllMenuAdapter;
 import com.example.foodorderingapp.adapters.PopularAdapter;
 import com.example.foodorderingapp.adapters.RecommendedAdapter;
 import com.example.foodorderingapp.viewmodel.ListViewModel;
@@ -34,6 +35,8 @@ public class ListFragment extends Fragment {
     RecyclerView popularRecycler;
     @BindView(R.id.recommended_recycler)
     RecyclerView recommendedRecycler;
+    @BindView(R.id.all_menu_recycler)
+    RecyclerView allMenuRecycler;
     @BindView(R.id.listError)
     TextView listError;
     @BindView(R.id.loadingView)
@@ -46,6 +49,7 @@ public class ListFragment extends Fragment {
     private ListViewModel mListViewModel;
     private PopularAdapter mPopularAdapter;
     private RecommendedAdapter mRecommendedAdapter;
+    private AllMenuAdapter mAllMenuAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,10 +80,22 @@ public class ListFragment extends Fragment {
         recommendedRecycler.setItemViewCacheSize(20);
         recommendedRecycler.setAdapter(mRecommendedAdapter);
 
+        mAllMenuAdapter = new AllMenuAdapter(new ArrayList<>());
+        allMenuRecycler.setHasFixedSize(true);
+        allMenuRecycler.setItemViewCacheSize(20);
+        allMenuRecycler.setAdapter(mAllMenuAdapter);
+
         observeViewModel();
     }
 
     private void observeViewModel() {
+
+        mListViewModel.allMenu.observe(this, allMenus -> {
+            if (allMenus != null && allMenus instanceof List) {
+                allMenuRecycler.setVisibility(View.VISIBLE);
+                mAllMenuAdapter.updateMenu(allMenus);
+            }
+        });
 
         mListViewModel.recommendations.observe(this, recommended -> {
             if (recommended != null && recommended instanceof List){
