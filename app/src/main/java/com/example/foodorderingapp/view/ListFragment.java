@@ -1,13 +1,11 @@
 package com.example.foodorderingapp.view;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -16,13 +14,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodorderingapp.R;
-import com.example.foodorderingapp.adapter.PopularAdapter;
-import com.example.foodorderingapp.models.FoodData;
-import com.example.foodorderingapp.models.Popular;
+import com.example.foodorderingapp.adapters.PopularAdapter;
+import com.example.foodorderingapp.adapters.RecommendedAdapter;
 import com.example.foodorderingapp.viewmodel.ListViewModel;
 
 import java.util.ArrayList;
@@ -33,11 +29,11 @@ import butterknife.ButterKnife;
 
 public class ListFragment extends Fragment {
 
-    //
-    @BindView(R.id.btn_cart)
-    ImageView btnCart;
+    // UI
     @BindView(R.id.popular_recycler)
     RecyclerView popularRecycler;
+    @BindView(R.id.recommended_recycler)
+    RecyclerView recommendedRecycler;
     @BindView(R.id.listError)
     TextView listError;
     @BindView(R.id.loadingView)
@@ -49,7 +45,7 @@ public class ListFragment extends Fragment {
     private View view;
     private ListViewModel mListViewModel;
     private PopularAdapter mPopularAdapter;
-
+    private RecommendedAdapter mRecommendedAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,18 +67,29 @@ public class ListFragment extends Fragment {
         });
 
         mPopularAdapter = new PopularAdapter(new ArrayList<>());
-        popularRecycler.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
         popularRecycler.setHasFixedSize(true);
         popularRecycler.setItemViewCacheSize(20);
         popularRecycler.setAdapter(mPopularAdapter);
+
+        mRecommendedAdapter = new RecommendedAdapter(new ArrayList<>());
+        recommendedRecycler.setHasFixedSize(true);
+        recommendedRecycler.setItemViewCacheSize(20);
+        recommendedRecycler.setAdapter(mRecommendedAdapter);
 
         observeViewModel();
     }
 
     private void observeViewModel() {
 
-        mListViewModel.foods.observe(this, foods ->{
-            if (foods != null && foods instanceof List){
+        mListViewModel.recommendations.observe(this, recommended -> {
+            if (recommended != null && recommended instanceof List){
+                recommendedRecycler.setVisibility(View.VISIBLE);
+                mRecommendedAdapter.updateRecommendedList(recommended);
+            }
+        });
+
+        mListViewModel.foods.observe(this, foods -> {
+            if (foods != null && foods instanceof List) {
                 popularRecycler.setVisibility(View.VISIBLE);
                 mPopularAdapter.updatePopularList(foods);
             }

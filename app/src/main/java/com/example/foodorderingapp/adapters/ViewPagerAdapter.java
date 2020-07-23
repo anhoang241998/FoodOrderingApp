@@ -1,4 +1,4 @@
-package com.example.foodorderingapp.adapter;
+package com.example.foodorderingapp.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

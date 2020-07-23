@@ -18,6 +18,4 @@ public class FoodApiService {
         }
         return retrofit;
     }
-
-
 }

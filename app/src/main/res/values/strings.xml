@@ -2,7 +2,7 @@
     <string name="app_name">Food Ordering App</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title">Vietnam Food</string>
+    <string name="title">Indonesia Food</string>
     <string name="hint">Search...</string>
     <string name="tv_string">Popular this Week</string>
     <string name="tv_error">An Error occured while loading data</string>
@@ -13,5 +13,11 @@
     <string name="btn_next">Next</string>
     <string name="btn_finish">Finish</string>
     <string name="app_subtitle">abc</string>
+    <string name="tv_string2">Recommended for you</string>
+    <string name="tv_name">Rendang</string>
+    <string name="tv_time">45 mins</string>
+    <string name="tv_delivery_type">Free Delivery</string>
+    <string name="tv_recommended_price">160</string>
+    <string name="tv_rating">4.5</string>
 
 </resources>

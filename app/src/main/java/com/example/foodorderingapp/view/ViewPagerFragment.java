@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.foodorderingapp.R;
-import com.example.foodorderingapp.adapter.ViewPagerAdapter;
+import com.example.foodorderingapp.adapters.ViewPagerAdapter;
 import com.example.foodorderingapp.view.onboardingscreens.FirstScreenFragment;
 import com.example.foodorderingapp.view.onboardingscreens.SecondScreenFragment;
 import com.example.foodorderingapp.view.onboardingscreens.ThirdScreenFragment;
