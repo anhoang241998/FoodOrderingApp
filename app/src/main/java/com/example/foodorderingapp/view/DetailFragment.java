@@ -1,11 +1,9 @@
 package com.example.foodorderingapp.view;
 
-import android.graphics.Point;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,26 +12,28 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.palette.graphics.Palette;
 
 import com.example.foodorderingapp.R;
-import com.ferfalk.simplesearchview.SimpleSearchView;
-import com.ferfalk.simplesearchview.utils.DimensUtils;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import butterknife.ButterKnife;
 
 public class DetailFragment extends Fragment {
 
-    public static final int EXTRA_REVEAL_CENTER_PADDING = 40;
-    Toolbar toolbar;
+    private Toolbar toolbar;
+    private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private View view;
-//    private SimpleSearchView searchView;
+    //    private SimpleSearchView searchView;
     private int mFoodUuid;
+//    private Bitmap mBitmap;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_detail, container, false);
         toolbar = view.findViewById(R.id.toolbar);
+        mCollapsingToolbarLayout = view.findViewById(R.id.collapsingToolbar);
 //        searchView = view.findViewById(R.id.searchView);
         ButterKnife.bind(view);
         return view;
@@ -42,18 +42,27 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (getArguments() != null) {
-            mFoodUuid = DetailFragmentArgs.fromBundle(getArguments()).getFoodUuid();
-        }
+//        if (getArguments() != null) {
+//            mFoodUuid = DetailFragmentArgs.fromBundle(getArguments()).getFoodUuid();
+//        }
 
         if (getActivity() != null) {
             ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+            toolbar.setTitleTextColor(255);
             setHasOptionsMenu(true);
         }
 
         toolbar.setNavigationOnClickListener(v -> {
             getActivity().onBackPressed();
         });
+
+        // for creating the palette in collapse toolbar
+//        mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.recommended1);
+//        Palette.from(mBitmap).generate(palette -> {
+//            if (palette != null) {
+//                mCollapsingToolbarLayout.setContentScrimColor(palette.getMutedColor(R.attr.colorPrimary));
+//            }
+//        });
 
     }
 

@@ -14,4 +14,11 @@
     <style name="AppTheme.PopupOverlay" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@android:color/white</item>
     </style>
+
+    <style name="CustomToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">#000</item>
+        <item name="colorControlNormal">#000</item>
+    </style>
+
+
 </resources>

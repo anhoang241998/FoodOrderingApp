@@ -7,11 +7,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodorderingapp.R;
 import com.example.foodorderingapp.models.Popular;
 import com.example.foodorderingapp.util.GlideUtil;
+import com.example.foodorderingapp.view.ListFragmentDirections;
 
 import java.util.List;
 
@@ -42,6 +44,9 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
         holder.popularName.setText(mPopularList.get(position).getName());
         GlideUtil.loadImages(holder.popularImage, mPopularList.get(position).getImageUrl(), GlideUtil.getCircularProgressDrawable(holder.popularImage.getContext()));
 
+//        holder.mLayout.setOnClickListener(view -> {
+//            action = ListFragmentDirections.actionDetail()
+//        });
     }
 
     @Override
@@ -53,7 +58,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
     }
 
     public static class PopularViewHolder extends RecyclerView.ViewHolder {
-
+        ConstraintLayout mLayout;
         ImageView popularImage;
         TextView popularName;
 
@@ -62,6 +67,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
 
             popularImage = itemView.findViewById(R.id.all_menu_image);
             popularName = itemView.findViewById(R.id.all_menu_name);
+            mLayout = itemView.findViewById(R.id.popularLayout);
         }
     }
 }

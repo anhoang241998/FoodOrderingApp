@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +44,8 @@ public class ListFragment extends Fragment {
     ProgressBar loadingView;
     @BindView(R.id.btn_details)
     Button btnDetails;
+    @BindView(R.id.btn_search)
+    ImageView mSearch;
 
     // Function
     private View view;
@@ -66,8 +69,14 @@ public class ListFragment extends Fragment {
         mListViewModel.refresh();
 
         btnDetails.setOnClickListener(v -> {
-            ListFragmentDirections.ActionDetail action = ListFragmentDirections.actionDetail();
+            NavDirections action = ListFragmentDirections.actionDetail();
             Navigation.findNavController(v).navigate(action);
+//            actionDetail =ListFragmentDirections.actionDetail()
+        });
+
+        mSearch.setOnClickListener(v -> {
+            NavDirections actionSearch = ListFragmentDirections.actionSearch();
+            Navigation.findNavController(v).navigate(actionSearch);
         });
 
         mPopularAdapter = new PopularAdapter(new ArrayList<>());
@@ -98,7 +107,7 @@ public class ListFragment extends Fragment {
         });
 
         mListViewModel.recommendations.observe(this, recommended -> {
-            if (recommended != null && recommended instanceof List){
+            if (recommended != null && recommended instanceof List) {
                 recommendedRecycler.setVisibility(View.VISIBLE);
                 mRecommendedAdapter.updateRecommendedList(recommended);
             }
