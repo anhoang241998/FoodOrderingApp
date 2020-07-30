@@ -42,7 +42,7 @@ public class ThirdScreenFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tv_finish.setOnClickListener(v -> {
-            NavDirections action = ViewPagerFragmentDirections.actionViewPagerList();
+            NavDirections action = ViewPagerFragmentDirections.actionIntro();
             Navigation.findNavController(v).navigate(action);
             onBoardingFinished();
         });

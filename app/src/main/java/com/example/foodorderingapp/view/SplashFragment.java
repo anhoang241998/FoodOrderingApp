@@ -31,7 +31,7 @@ public class SplashFragment extends Fragment {
         Handler handler = new Handler();
         handler.postDelayed(() -> {
             if (onBoardingFinished()) {
-                NavDirections action = SplashFragmentDirections.actionList();
+                NavDirections action = SplashFragmentDirections.actionIntro();
                 Navigation.findNavController(view).navigate(action);
             } else {
                 NavDirections action = SplashFragmentDirections.actionSplashFragmentToViewPagerFragment();
@@ -50,5 +50,9 @@ public class SplashFragment extends Fragment {
     private boolean onBoardingFinished() {
         sharedPref = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE);
         return sharedPref.getBoolean("Finished", false);
+    }
+
+    private boolean onLogin() {
+        return sharedPref.getBoolean("abc", false);
     }
 }

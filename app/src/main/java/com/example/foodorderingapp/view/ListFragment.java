@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -54,6 +55,7 @@ public class ListFragment extends Fragment {
     private RecommendedAdapter mRecommendedAdapter;
     private AllMenuAdapter mAllMenuAdapter;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -95,7 +97,18 @@ public class ListFragment extends Fragment {
         allMenuRecycler.setAdapter(mAllMenuAdapter);
 
         observeViewModel();
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (getActivity() != null)
+                getActivity().finish();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
+
+
 
     private void observeViewModel() {
 
