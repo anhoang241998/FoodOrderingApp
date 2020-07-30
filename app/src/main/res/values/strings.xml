@@ -38,5 +38,9 @@
     <string name="tv_hint_email_name">you@gmail.com</string>
     <string name="btn_create_account">CREATE ACCOUNT</string>
     <string name="tv_user_name">User Name</string>
+    <string name="lowercase_letters">Lowercase Letters</string>
+    <string name="uppercase_letters">Uppercase Letters</string>
+    <string name="digits">Digits</string>
+    <string name="special_characters">Special Characters</string>
 
 </resources>
