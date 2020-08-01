@@ -74,7 +74,7 @@
     </fragment>
     <fragment
         android:id="@+id/introductionFragment"
-        android:name="com.example.foodorderingapp.view.IntroductionFragment"
+        android:name="com.example.foodorderingapp.view.authentication.IntroductionFragment"
         android:label="fragment_introdution"
         tools:layout="@layout/fragment_introdution">
         <action
@@ -86,7 +86,7 @@
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
-        android:name="com.example.foodorderingapp.view.LogInFragment"
+        android:name="com.example.foodorderingapp.view.authentication.LogInFragment"
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" >
         <action
@@ -97,10 +97,13 @@
         <action
             android:id="@+id/actionSignUp"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/actionForget"
+            app:destination="@id/forgetPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.foodorderingapp.view.SignUpFragment"
+        android:name="com.example.foodorderingapp.view.authentication.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -108,5 +111,34 @@
             app:destination="@id/listFragment"
             app:popUpTo="@id/signUpFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgetPasswordFragment"
+        android:name="com.example.foodorderingapp.view.authentication.ForgetPasswordFragment"
+        android:label="fragment_forget_password"
+        tools:layout="@layout/fragment_forget_password" >
+        <action
+            android:id="@+id/actionNewPassword"
+            app:destination="@id/newPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newPasswordFragment"
+        android:name="com.example.foodorderingapp.view.authentication.NewPasswordFragment"
+        android:label="fragment_new_password"
+        tools:layout="@layout/fragment_new_password" >
+        <action
+            android:id="@+id/actionNewPasswordUpdated"
+            app:destination="@id/confirmPasswordUpdatedFragment"
+            app:popUpTo="@id/newPasswordFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmPasswordUpdatedFragment"
+        android:name="com.example.foodorderingapp.view.authentication.ConfirmPasswordUpdatedFragment"
+        android:label="fragment_confirm_password_updated"
+        tools:layout="@layout/fragment_confirm_password_updated" >
+        <action
+            android:id="@+id/actionLogin"
+            app:destination="@id/logInFragment" />
     </fragment>
 </navigation>

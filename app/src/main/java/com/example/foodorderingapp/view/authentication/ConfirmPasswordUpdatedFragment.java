@@ -1,11 +1,10 @@
-package com.example.foodorderingapp.view;
+package com.example.foodorderingapp.view.authentication;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,36 +13,25 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.example.foodorderingapp.R;
+public class ConfirmPasswordUpdatedFragment extends Fragment {
 
-public class IntroductionFragment extends Fragment {
-
-    //UI
-    Button mLoginButton;
-    TextView mSignUp;
     View view;
+    Button mButtonLogin;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_introdution, container, false);
-        mLoginButton = view.findViewById(R.id.btn_move_login);
-        mSignUp = view.findViewById(R.id.tv_sign_up);
+        view = inflater.inflate(R.layout.fragment_confirm_password_updated, container, false);
+        mButtonLogin = view.findViewById(R.id.btn_log_in_new_password);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        mLoginButton.setOnClickListener(v -> {
-            NavDirections actionLogin = IntroductionFragmentDirections.actionLogin();
+        mButtonLogin.setOnClickListener(v -> {
+            NavDirections actionLogin = ConfirmPasswordUpdatedFragmentDirections.actionLogin();
             Navigation.findNavController(v).navigate(actionLogin);
         });
-
-        mSignUp.setOnClickListener(v -> {
-            NavDirections actionSignUp = IntroductionFragmentDirections.actionSignUp();
-            Navigation.findNavController(v).navigate(actionSignUp);
-        });
-
     }
 }

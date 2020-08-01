@@ -42,5 +42,14 @@
     <string name="uppercase_letters">Uppercase Letters</string>
     <string name="digits">Digits</string>
     <string name="special_characters">Special Characters</string>
+    <string name="tv_title_forgot_password">forget password</string>
+    <string name="tv_forgot_details">Provide your account\'s email for which you want to reset your password</string>
+    <string name="tv_new_pass_details">Your identity has been verified! Set your new password</string>
+    <string name="btn_next_forget_password">NEXT</string>
+    <string name="tv_title_new_pass">new credentials</string>
+    <string name="tv_hint_new_pass">New Password</string>
+    <string name="tv_btn_ok">OK</string>
+    <string name="tv_password_updated">Password Updated</string>
+    <string name="tv_password_updated_details">Your password has been updated</string>
 
 </resources>

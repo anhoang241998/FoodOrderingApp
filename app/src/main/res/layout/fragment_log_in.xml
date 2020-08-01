@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.LogInFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <com.google.android.material.appbar.AppBarLayout
+        <variable
+            name="viewModel"
+            type="com.example.foodorderingapp.viewmodel.LogInViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff"
-        app:liftOnScroll="true">
+        android:layout_height="match_parent"
+        tools:context=".view.authentication.LogInFragment">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_login"
+
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|snap|enterAlways"
-            app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
-            app:title="@string/app_name" />
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            app:liftOnScroll="true">
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_login"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|snap|enterAlways"
+                app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+                app:title="@string/app_name" />
+
+        </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -35,6 +44,11 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_food_login">
 
+            <ProgressBar
+                android:id="@+id/progress_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,6 +68,7 @@
                     android:textSize="@dimen/_25sdp" />
 
                 <EditText
+                    android:id="@+id/edt_email_login"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_42sdp"
                     android:layout_marginTop="@dimen/_12sdp"
@@ -62,10 +77,11 @@
                     android:drawablePadding="@dimen/_10sdp"
                     android:hint="@string/tv_email"
                     android:importantForAutofill="no"
-                    android:inputType="text"
+                    android:inputType="textEmailAddress"
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="@dimen/_12sdp"
-                    tools:ignore="RtlSymmetry" />
+                    tools:ignore="RtlSymmetry"
+                    app:addTextChangedListener="@{viewModel.getEmailTextWatcher}"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -75,6 +91,7 @@
                     app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_password_login"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_42sdp"
                         android:background="@drawable/bg_edit_text"
@@ -85,11 +102,13 @@
                         android:inputType="textPassword"
                         android:paddingStart="@dimen/_12sdp"
                         android:paddingEnd="@dimen/_12sdp"
-                        tools:ignore="RtlSymmetry" />
+                        tools:ignore="RtlSymmetry"
+                        app:addTextChangedListener="@{viewModel.getPasswordTextWatcher}"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
+                    android:id="@+id/tv_forget_pass"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_12sdp"
@@ -116,11 +135,13 @@
                     android:background="@drawable/login_btn_bg"
                     android:text="@string/btn_sign_in"
                     android:textColor="#FFFFFF"
-                    android:textSize="@dimen/_14sdp" />
+                    android:textSize="@dimen/_14sdp"
+                    android:onClick="@{viewModel::onLoginClicked}"/>
 
 
             </LinearLayout>
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

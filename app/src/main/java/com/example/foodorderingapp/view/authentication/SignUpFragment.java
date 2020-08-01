@@ -1,10 +1,9 @@
-package com.example.foodorderingapp.view;
+package com.example.foodorderingapp.view.authentication;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,11 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.foodorderingapp.R;
-import com.example.foodorderingapp.util.PasswordStrengthCalculator;
 import com.example.foodorderingapp.util.StrengthLevel;
+import com.example.foodorderingapp.viewmodel.SignUpViewModel;
 
 public class SignUpFragment extends Fragment {
     View view, mStrengthLevelIndicator;
@@ -31,7 +30,7 @@ public class SignUpFragment extends Fragment {
     ImageView mUpperCaseImage, mLowerCaseImage, mDigitsImage, mSpecialCharImage;
 
     private Integer color = R.color.weak;
-    private PasswordStrengthCalculator mPasswordStrengthCalculator = new PasswordStrengthCalculator();
+    private SignUpViewModel mSignUpViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,29 +67,31 @@ public class SignUpFragment extends Fragment {
             getActivity().onBackPressed();
         });
 
-        mPassword.addTextChangedListener(mPasswordStrengthCalculator);
+        mSignUpViewModel = ViewModelProviders.of(this).get(SignUpViewModel.class);
 
-        mPasswordStrengthCalculator.strengthLevel.observe(this, strengthLevel -> {
+        mPassword.addTextChangedListener(mSignUpViewModel);
+
+        mSignUpViewModel.strengthLevel.observe(this, strengthLevel -> {
             displayStrengthLevel(strengthLevel);
         });
 
-        mPasswordStrengthCalculator.strengthColor.observe(this, strengthColor -> {
+        mSignUpViewModel.strengthColor.observe(this, strengthColor -> {
             color = strengthColor;
         });
 
-        mPasswordStrengthCalculator.lowercase.observe(this, value -> {
+        mSignUpViewModel.lowercase.observe(this, value -> {
             displayPasswordSuggestion(value, mLowerCaseImage, mLowerCaseText);
         });
 
-        mPasswordStrengthCalculator.uppercase.observe(this, value -> {
+        mSignUpViewModel.uppercase.observe(this, value -> {
             displayPasswordSuggestion(value, mUpperCaseImage, mUpperCaseText);
         });
 
-        mPasswordStrengthCalculator.digit.observe(this, value -> {
+        mSignUpViewModel.digit.observe(this, value -> {
             displayPasswordSuggestion(value, mDigitsImage, mDigitsText);
         });
 
-        mPasswordStrengthCalculator.specialChar.observe(this, value -> {
+        mSignUpViewModel.specialChar.observe(this, value -> {
             displayPasswordSuggestion(value, mSpecialCharImage, mSpecialCharactersText);
         });
 
