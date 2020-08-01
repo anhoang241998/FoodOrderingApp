@@ -41,8 +41,6 @@ public class ListFragment extends Fragment {
     RecyclerView allMenuRecycler;
     @BindView(R.id.listError)
     TextView listError;
-    @BindView(R.id.loadingView)
-    ProgressBar loadingView;
     @BindView(R.id.btn_details)
     Button btnDetails;
     @BindView(R.id.btn_search)
@@ -68,8 +66,8 @@ public class ListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mListViewModel = ViewModelProviders.of(this).get(ListViewModel.class);
-        mListViewModel.refresh();
 
+        mListViewModel.setLoading(true);
         btnDetails.setOnClickListener(v -> {
             NavDirections action = ListFragmentDirections.actionDetail();
             Navigation.findNavController(v).navigate(action);
@@ -108,7 +106,11 @@ public class ListFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
-
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mListViewModel.refresh();
+    }
 
     private void observeViewModel() {
 
@@ -139,14 +141,5 @@ public class ListFragment extends Fragment {
             }
         });
 
-        mListViewModel.loading.observe(this, isLoading -> {
-            if (isLoading != null && isLoading instanceof Boolean) {
-                loadingView.setVisibility(isLoading ? View.VISIBLE : View.GONE);
-                if (isLoading) {
-                    listError.setVisibility(View.GONE);
-                    popularRecycler.setVisibility(View.GONE);
-                }
-            }
-        });
     }
 }

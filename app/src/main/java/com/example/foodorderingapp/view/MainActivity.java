@@ -1,15 +1,21 @@
 package com.example.foodorderingapp.view;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
 
 import com.example.foodorderingapp.R;
+import com.example.foodorderingapp.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
     //    private NavController mNavController;
+    MainViewModel mMainViewModel;
+    public ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,10 +23,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 //        mNavController = Navigation.findNavController(this, R.id.fragment);
 //        NavigationUI.setupActionBarWithNavController(this, mNavController);
-    }
-
+        mProgressBar = findViewById(R.id.progress_login);
+        mMainViewModel = new MainViewModel();
+        mMainViewModel.getLoading().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    mProgressBar.setVisibility(View.VISIBLE);
+                } else {
+                    mProgressBar.setVisibility(View.GONE);
+                }
+            }
+        });
 //    @Override
 //    public boolean onSupportNavigateUp() {
 //        return NavigationUI.navigateUp(mNavController, (DrawerLayout) null);
 //    }
+    }
+
 }

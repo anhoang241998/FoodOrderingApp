@@ -1,28 +1,29 @@
 package com.example.foodorderingapp.viewmodel;
 
+import android.app.Application;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.example.foodorderingapp.models.User;
 import com.example.foodorderingapp.view.authentication.LogInFragmentDirections;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class LogInViewModel extends ViewModel {
+public class LogInViewModel extends BaseViewModel {
     private User user;
     private LogInResultCallbacks mLogInResultCallbacks;
-    public MutableLiveData<Boolean> loading = new MutableLiveData<Boolean>();
-    public MutableLiveData<Boolean> logInError = new MutableLiveData<Boolean>();
-    public MutableLiveData<String> email = new MutableLiveData<String>();
+    private FirebaseAuth mAuth;
 
     public LogInViewModel(LogInResultCallbacks logInResultCallbacks) {
         mLogInResultCallbacks = logInResultCallbacks;
         user = new User();
+        mAuth = FirebaseAuth.getInstance();
     }
+
 
 
     public TextWatcher getEmailTextWatcher() {
@@ -70,9 +71,20 @@ public class LogInViewModel extends ViewModel {
         else if (errorCode == 2) mLogInResultCallbacks.onError("You must enter password");
         else if (errorCode == 3) mLogInResultCallbacks.onError("Your Password must greater than 6");
         else {
-            mLogInResultCallbacks.onSuccess("Login success");
-            NavDirections actionSignIn = LogInFragmentDirections.actionList();
-            Navigation.findNavController(view).navigate(actionSignIn);
+            mAuth.signInWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    mLogInResultCallbacks.onSuccess("Login success");
+                    NavDirections actionSignIn = LogInFragmentDirections.actionList();
+                    Navigation.findNavController(view).navigate(actionSignIn);
+                    setLoading(true);
+                } else {
+                    mLogInResultCallbacks.onError("Login fail!");
+                    setLoading(false);
+                }
+
+            });
+
+
         }
     }
 

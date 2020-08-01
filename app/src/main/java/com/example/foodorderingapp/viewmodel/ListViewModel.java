@@ -19,26 +19,21 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListViewModel extends AndroidViewModel {
+public class ListViewModel extends BaseViewModel {
 
     public MutableLiveData<List<Popular>> foods = new MutableLiveData<List<Popular>>();
     public MutableLiveData<List<Recommended>> recommendations = new MutableLiveData<List<Recommended>>();
     public MutableLiveData<List<Allmenu>> allMenu = new MutableLiveData<List<Allmenu>>();
     public MutableLiveData<Boolean> foodLoadError = new MutableLiveData<Boolean>();
-    public MutableLiveData<Boolean> loading = new MutableLiveData<Boolean>();
 
     private FoodApi apiInterface;
-
-    public ListViewModel(@NonNull Application application) {
-        super(application);
-    }
 
     public void refresh() {
         fetchFromRemote();
     }
 
     private void fetchFromRemote() {
-        loading.setValue(true);
+
 
         apiInterface = FoodApiService.getRetrofitInstance().create(FoodApi.class);
 
@@ -60,30 +55,29 @@ public class ListViewModel extends AndroidViewModel {
             }
         });
 
-
     }
 
     private void foodsRetrieved(List<Popular> list) {
         foods.setValue(list);
         foodLoadError.setValue(false);
-        loading.setValue(false);
+        //setLoading(false);
     }
 
     private void recommendationsRetrieved(List<Recommended> recommended) {
         recommendations.setValue(recommended);
         foodLoadError.setValue(false);
-        loading.setValue(false);
+        //setLoading(false);
     }
 
     private void  allMenuRetrieved(List<Allmenu> allMenuList) {
         allMenu.setValue(allMenuList);
         foodLoadError.setValue(false);
-        loading.setValue(false);
+        //setLoading(false);
     }
 
     private void apiErrors() {
         foodLoadError.setValue(true);
-        loading.setValue(false);
+        //setLoading(false);
     }
 
 
