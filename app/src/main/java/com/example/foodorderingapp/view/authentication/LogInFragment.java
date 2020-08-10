@@ -44,7 +44,6 @@ public class LogInFragment extends Fragment implements LogInResultCallbacks {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         mFragmentLogInBinding.setViewModel(ViewModelProviders.of(this, new LogInViewModelFactory(this)).get(LogInViewModel.class));
 
         if (getActivity() != null) {

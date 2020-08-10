@@ -8,26 +8,33 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.foodorderingapp.R;
+import com.example.foodorderingapp.databinding.FragmentLogInBinding;
+import com.example.foodorderingapp.databinding.FragmentSignUpBinding;
 import com.example.foodorderingapp.util.StrengthLevel;
+import com.example.foodorderingapp.viewmodel.SignUpResultCallbacks;
 import com.example.foodorderingapp.viewmodel.SignUpViewModel;
+import com.example.foodorderingapp.viewmodel.SignUpViewModelFactory;
 
-public class SignUpFragment extends Fragment {
+public class SignUpFragment extends Fragment implements SignUpResultCallbacks {
     View view, mStrengthLevelIndicator;
     Toolbar mToolbar;
     EditText mName, mEmail, mPassword;
     Button mSignUp;
     TextView mStrengthLevelTxt, mUpperCaseText, mLowerCaseText, mDigitsText, mSpecialCharactersText;
     ImageView mUpperCaseImage, mLowerCaseImage, mDigitsImage, mSpecialCharImage;
+    FragmentSignUpBinding mFragmentSignUpBinding;
 
     private Integer color = R.color.weak;
     private SignUpViewModel mSignUpViewModel;
@@ -35,7 +42,8 @@ public class SignUpFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_sign_up, container, false);
+        mFragmentSignUpBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container,false);
+        view = mFragmentSignUpBinding.getRoot();
         mToolbar = view.findViewById(R.id.toolbar_signUp);
         mName = view.findViewById(R.id.edt_username);
         mEmail = view.findViewById(R.id.edt_email);
@@ -57,7 +65,7 @@ public class SignUpFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        mFragmentSignUpBinding.setViewModel(ViewModelProviders.of(this, new SignUpViewModelFactory(this)).get(SignUpViewModel.class));
         if (getActivity() != null) {
             ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
             setHasOptionsMenu(true);
@@ -116,5 +124,13 @@ public class SignUpFragment extends Fragment {
     }
 
 
+    @Override
+    public void onSuccess(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void onError(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
 }

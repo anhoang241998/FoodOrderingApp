@@ -7,15 +7,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodorderingapp.R;
+import com.example.foodorderingapp.databinding.ItemAllMenuRecyclerBinding;
 import com.example.foodorderingapp.models.Allmenu;
 import com.example.foodorderingapp.util.GlideUtil;
+import com.example.foodorderingapp.view.ListFragmentDirections;
+import com.example.foodorderingapp.view.recyclerinterface.AllMenuClickListener;
 
 import java.util.List;
 
-public class AllMenuAdapter extends RecyclerView.Adapter<AllMenuAdapter.AllMenuAdapterViewHolder> {
+public class AllMenuAdapter extends RecyclerView.Adapter<AllMenuAdapter.AllMenuAdapterViewHolder> implements AllMenuClickListener {
 
     private List<Allmenu> mAllMenu;
 
@@ -32,19 +37,16 @@ public class AllMenuAdapter extends RecyclerView.Adapter<AllMenuAdapter.AllMenuA
     @NonNull
     @Override
     public AllMenuAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_all_menu_recycler, parent, false);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        ItemAllMenuRecyclerBinding view = DataBindingUtil.inflate(inflater, R.layout.item_all_menu_recycler, parent, false);
         return new AllMenuAdapterViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AllMenuAdapterViewHolder holder, int position) {
-        holder.allMenuName.setText(mAllMenu.get(position).getName());
-        holder.allMenuPrice.setText(mAllMenu.get(position).getPrice());
-        holder.allMenuTime.setText(mAllMenu.get(position).getDeliveryTime());
-        holder.allMenuRating.setText(mAllMenu.get(position).getRating());
-        holder.allMenuCharges.setText(mAllMenu.get(position).getDeliveryCharges());
-        holder.allMenuNote.setText(mAllMenu.get(position).getNote());
-        GlideUtil.loadImages(holder.allMenuImage, mAllMenu.get(position).getImageUrl(), GlideUtil.getCircularProgressDrawable(holder.allMenuImage.getContext()));
+        holder.itemView.setAllmenu(mAllMenu.get(position));
+        holder.itemView.setListener(this);
+//        GlideUtil.loadImages(holder.allMenuImage, mAllMenu.get(position).getImageUrl(), GlideUtil.getCircularProgressDrawable(holder.allMenuImage.getContext()));
 
     }
 
@@ -56,20 +58,22 @@ public class AllMenuAdapter extends RecyclerView.Adapter<AllMenuAdapter.AllMenuA
         return 0;
     }
 
+    @Override
+    public void onMenuClicked(View v) {
+        String uuidString = ((TextView)v.findViewById(R.id.allmenuID)).getText().toString();
+        int uuid = Integer.valueOf(uuidString);
+        ListFragmentDirections.ActionDetail action = ListFragmentDirections.actionDetail();
+        action.setAllMenuUuid(uuid);
+        Navigation.findNavController(v).navigate(action);
+    }
+
     public class AllMenuAdapterViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView allMenuImage;
-        TextView allMenuName, allMenuNote, allMenuRating, allMenuTime, allMenuCharges, allMenuPrice;
+        ItemAllMenuRecyclerBinding itemView;
 
-        public AllMenuAdapterViewHolder(@NonNull View itemView) {
-            super(itemView);
-            allMenuName = itemView.findViewById(R.id.all_menu_name);
-            allMenuNote = itemView.findViewById(R.id.all_menu_note);
-            allMenuCharges = itemView.findViewById(R.id.all_menu_delivery_charge);
-            allMenuTime = itemView.findViewById(R.id.all_menu_delivery_time);
-            allMenuRating = itemView.findViewById(R.id.all_menu_rating);
-            allMenuPrice = itemView.findViewById(R.id.all_menu_price);
-            allMenuImage = itemView.findViewById(R.id.all_menu_image);
+        public AllMenuAdapterViewHolder(@NonNull ItemAllMenuRecyclerBinding itemView) {
+            super(itemView.getRoot());
+            this.itemView = itemView;
         }
     }
 }

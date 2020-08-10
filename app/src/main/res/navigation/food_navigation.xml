@@ -20,6 +20,9 @@
             app:destination="@id/searchFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/actionAddToCart"
+            app:destination="@id/addToCartFragment" />
 
     </fragment>
     <fragment
@@ -30,6 +33,18 @@
         <action
             android:id="@+id/actionList"
             app:destination="@id/listFragment" />
+        <argument
+            android:name="PopularUuid"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="RecommendUuid"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="AllMenuUuid"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -140,5 +155,14 @@
         <action
             android:id="@+id/actionLogin"
             app:destination="@id/logInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addToCartFragment"
+        android:name="com.example.foodorderingapp.view.AddToCartFragment"
+        android:label="fragment_add_to_cart"
+        tools:layout="@layout/fragment_add_to_cart" >
+        <action
+            android:id="@+id/action_addToCartFragment_to_listFragment2"
+            app:destination="@id/listFragment" />
     </fragment>
 </navigation>

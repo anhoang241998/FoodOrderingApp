@@ -1,15 +1,13 @@
 package com.example.foodorderingapp.viewmodel;
 
-import android.app.Application;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
-import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
-import com.example.foodorderingapp.models.User;
+import com.example.foodorderingapp.models.authentication.User;
 import com.example.foodorderingapp.view.authentication.LogInFragmentDirections;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -23,8 +21,6 @@ public class LogInViewModel extends BaseViewModel {
         user = new User();
         mAuth = FirebaseAuth.getInstance();
     }
-
-
 
     public TextWatcher getEmailTextWatcher() {
         return new TextWatcher() {
@@ -69,17 +65,14 @@ public class LogInViewModel extends BaseViewModel {
         if (errorCode == 0) mLogInResultCallbacks.onError("You must enter email address");
         else if (errorCode == 1) mLogInResultCallbacks.onError("Your email is invalid");
         else if (errorCode == 2) mLogInResultCallbacks.onError("You must enter password");
-        else if (errorCode == 3) mLogInResultCallbacks.onError("Your Password must greater than 6");
         else {
             mAuth.signInWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     mLogInResultCallbacks.onSuccess("Login success");
                     NavDirections actionSignIn = LogInFragmentDirections.actionList();
                     Navigation.findNavController(view).navigate(actionSignIn);
-                    setLoading(true);
                 } else {
                     mLogInResultCallbacks.onError("Login fail!");
-                    setLoading(false);
                 }
 
             });

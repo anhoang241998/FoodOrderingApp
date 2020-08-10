@@ -7,15 +7,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodorderingapp.R;
+import com.example.foodorderingapp.databinding.ItemRecommendedRecyclerBinding;
 import com.example.foodorderingapp.models.Recommended;
 import com.example.foodorderingapp.util.GlideUtil;
+import com.example.foodorderingapp.view.ListFragmentDirections;
+import com.example.foodorderingapp.view.recyclerinterface.RecommendClickListener;
 
 import java.util.List;
 
-public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.RecommendedViewHolder> {
+public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.RecommendedViewHolder> implements RecommendClickListener {
 
     private List<Recommended> mRecommendedList;
 
@@ -32,18 +37,16 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
     @NonNull
     @Override
     public RecommendedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recommended_recycler, parent, false);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        ItemRecommendedRecyclerBinding view = DataBindingUtil.inflate(inflater, R.layout.item_recommended_recycler, parent, false);
         return new RecommendedViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecommendedViewHolder holder, int position) {
-        holder.recommendedName.setText(mRecommendedList.get(position).getName());
-        holder.recommendedRating.setText(mRecommendedList.get(position).getRating());
-        holder.recommendedCharges.setText(mRecommendedList.get(position).getDeliveryCharges());
-        holder.recommendedDeliveryTime.setText(mRecommendedList.get(position).getDeliveryTime());
-        holder.recommendedPrice.setText(mRecommendedList.get(position).getPrice());
-        GlideUtil.loadImages(holder.recommendedImage, mRecommendedList.get(position).getImageUrl(), GlideUtil.getCircularProgressDrawable(holder.recommendedImage.getContext()));
+        holder.itemView.setRecommend(mRecommendedList.get(position));
+        holder.itemView.setListener(this);
+//        GlideUtil.loadImages(holder.recommendedImage, mRecommendedList.get(position).getImageUrl(), GlideUtil.getCircularProgressDrawable(holder.recommendedImage.getContext()));
     }
 
     @Override
@@ -54,20 +57,22 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         return 0;
     }
 
+    @Override
+    public void onRecommendClicked(View v) {
+        String uuidString = ((TextView)v.findViewById(R.id.recommendID)).getText().toString();
+        int uuid = Integer.valueOf(uuidString);
+        ListFragmentDirections.ActionDetail action = ListFragmentDirections.actionDetail();
+        action.setRecommendUuid(uuid);
+        Navigation.findNavController(v).navigate(action);
+    }
+
     public class RecommendedViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView recommendedImage;
-        TextView recommendedName, recommendedRating, recommendedDeliveryTime, recommendedCharges, recommendedPrice;
+        ItemRecommendedRecyclerBinding itemView;
 
-        public RecommendedViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            recommendedImage = itemView.findViewById(R.id.recommended_image);
-            recommendedName = itemView.findViewById(R.id.recommended_name);
-            recommendedRating = itemView.findViewById(R.id.recommended_rating);
-            recommendedDeliveryTime = itemView.findViewById(R.id.recommended_delivery_time);
-            recommendedCharges = itemView.findViewById(R.id.delivery_type);
-            recommendedPrice = itemView.findViewById(R.id.recommended_price);
+        public RecommendedViewHolder(@NonNull ItemRecommendedRecyclerBinding itemView) {
+            super(itemView.getRoot());
+            this.itemView = itemView;
         }
     }
 }

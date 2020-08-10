@@ -1,4 +1,6 @@
-package com.example.foodorderingapp.models;
+package com.example.foodorderingapp.models.retrofit;
+
+import com.example.foodorderingapp.models.FoodData;
 
 import java.util.List;
 

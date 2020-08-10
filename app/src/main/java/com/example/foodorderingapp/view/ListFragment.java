@@ -41,8 +41,6 @@ public class ListFragment extends Fragment {
     RecyclerView allMenuRecycler;
     @BindView(R.id.listError)
     TextView listError;
-    @BindView(R.id.btn_details)
-    Button btnDetails;
     @BindView(R.id.btn_search)
     ImageView mSearch;
 
@@ -66,13 +64,6 @@ public class ListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mListViewModel = ViewModelProviders.of(this).get(ListViewModel.class);
-
-        mListViewModel.setLoading(true);
-        btnDetails.setOnClickListener(v -> {
-            NavDirections action = ListFragmentDirections.actionDetail();
-            Navigation.findNavController(v).navigate(action);
-//            actionDetail =ListFragmentDirections.actionDetail()
-        });
 
         mSearch.setOnClickListener(v -> {
             NavDirections actionSearch = ListFragmentDirections.actionSearch();

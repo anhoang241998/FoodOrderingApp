@@ -4,32 +4,62 @@ package com.example.foodorderingapp.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Recommended implements Parcelable {
-
+@Entity
+public class Recommended {
+    @ColumnInfo(name = "name")
     @SerializedName("name")
     @Expose
-    private String name;
+    public String name;
+
+    @ColumnInfo(name = "image_url")
     @SerializedName("imageUrl")
     @Expose
-    private String imageUrl;
+    public String imageUrl;
+
+    @ColumnInfo(name = "rating")
     @SerializedName("rating")
     @Expose
-    private String rating;
+    public String rating;
+
+    @ColumnInfo(name = "delivery_time")
     @SerializedName("deliveryTime")
     @Expose
-    private String deliveryTime;
+    public String deliveryTime;
+
+    @ColumnInfo(name = "delivery_charge")
     @SerializedName("deliveryCharges")
     @Expose
-    private String deliveryCharges;
+    public String deliveryCharges;
+
+    @ColumnInfo(name = "price")
     @SerializedName("price")
     @Expose
-    private String price;
+    public String price;
+
+    @ColumnInfo(name = "note")
     @SerializedName("note")
     @Expose
-    private String note;
+    public String note;
+
+    @PrimaryKey(autoGenerate = true)
+    public int uuid;
+
+    public Recommended(String name, String imageUrl, String rating, String deliveryTime, String deliveryCharges, String price, String note) {
+        this.name = name;
+        this.imageUrl = imageUrl;
+        this.rating = rating;
+        this.deliveryTime = deliveryTime;
+        this.deliveryCharges = deliveryCharges;
+        this.price = price;
+        this.note = note;
+    }
 
     public String getName() {
         return name;
@@ -87,44 +117,5 @@ public class Recommended implements Parcelable {
         this.note = note;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.name);
-        dest.writeString(this.imageUrl);
-        dest.writeString(this.rating);
-        dest.writeString(this.deliveryTime);
-        dest.writeString(this.deliveryCharges);
-        dest.writeString(this.price);
-        dest.writeString(this.note);
-    }
-
-    public Recommended() {
-    }
-
-    protected Recommended(Parcel in) {
-        this.name = in.readString();
-        this.imageUrl = in.readString();
-        this.rating = in.readString();
-        this.deliveryTime = in.readString();
-        this.deliveryCharges = in.readString();
-        this.price = in.readString();
-        this.note = in.readString();
-    }
-
-    public static final Parcelable.Creator<Recommended> CREATOR = new Parcelable.Creator<Recommended>() {
-        @Override
-        public Recommended createFromParcel(Parcel source) {
-            return new Recommended(source);
-        }
-
-        @Override
-        public Recommended[] newArray(int size) {
-            return new Recommended[size];
-        }
-    };
 }

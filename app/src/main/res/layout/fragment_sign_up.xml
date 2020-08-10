@@ -1,257 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.authentication.SignUpFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff"
-        app:liftOnScroll="true">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.foodorderingapp.viewmodel.SignUpViewModel" />
+    </data>
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_signUp"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="enterAlways|snap|scroll"
-            app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
-            app:title="@string/app_name" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-
-    <androidx.core.widget.NestedScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:isScrollContainer="false"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        tools:context=".view.authentication.SignUpFragment">
 
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="@dimen/_20sdp">
+            android:background="#fff"
+            app:liftOnScroll="true">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:fontFamily="@font/open_sans_bold"
-                android:text="@string/tv_create_account"
-                android:textColor="#000"
-                android:textSize="@dimen/_24sdp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:fontFamily="@font/open_sans_semibold"
-                android:text="@string/tv_create_description"
-                android:textSize="@dimen/_14sdp"
-                android:textStyle="bold" />
-
-
-            <EditText
-                android:id="@+id/edt_username"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_signUp"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_42sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:background="@drawable/bg_edit_text"
-                android:drawableStart="@drawable/custom_email_icon"
-                android:drawablePadding="@dimen/_10sdp"
-                android:hint="@string/tv_user_name"
-                android:imeOptions="actionNext"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:paddingStart="@dimen/_12sdp"
-                android:paddingEnd="@dimen/_12sdp"
-                tools:ignore="RtlSymmetry" />
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="enterAlways|snap|scroll"
+                app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+                app:title="@string/app_name" />
 
-            <EditText
-                android:id="@+id/edt_email"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_42sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:background="@drawable/bg_edit_text"
-                android:drawableStart="@drawable/custom_email_icon"
-                android:drawablePadding="@dimen/_10sdp"
-                android:hint="@string/tv_hint_email_name"
-                android:imeOptions="actionNext"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:paddingStart="@dimen/_12sdp"
-                android:paddingEnd="@dimen/_12sdp"
-                tools:ignore="RtlSymmetry,TextFields" />
+        </com.google.android.material.appbar.AppBarLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:isScrollContainer="false"
+            android:scrollbars="none"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                tools:ignore="ContentDescription">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/_20sdp">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edt_password_container"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="@string/tv_create_account"
+                    android:textColor="#000"
+                    android:textSize="@dimen/_24sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@string/tv_create_description"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold" />
+
+
+                <EditText
+                    android:id="@+id/edt_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_42sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/bg_edit_text"
+                    android:drawableStart="@drawable/custom_email_icon"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/tv_user_name"
+                    android:imeOptions="actionNext"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingEnd="@dimen/_12sdp"
+                    tools:ignore="RtlSymmetry"
+                    app:addTextChangedListener="@{viewModel.nameTextWatcher}"/>
+
+                <EditText
+                    android:id="@+id/edt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_42sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/bg_edit_text"
+                    android:drawableStart="@drawable/custom_email_icon"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/tv_hint_email_name"
+                    android:imeOptions="actionNext"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingEnd="@dimen/_12sdp"
+                    tools:ignore="RtlSymmetry,TextFields"
+                    app:addTextChangedListener="@{viewModel.userNameTextWatcher}"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:hintEnabled="false"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:passwordToggleEnabled="true">
+                    android:layout_marginTop="@dimen/_12sdp"
+                    tools:ignore="ContentDescription">
 
-                    <EditText
-                        android:id="@+id/edt_password"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/edt_password_container"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_42sdp"
-                        android:background="@drawable/bg_edit_text"
-                        android:drawableStart="@drawable/custom_lock_icon"
-                        android:drawablePadding="@dimen/_10sdp"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:hint="@string/tv_password"
-                        android:imeOptions="actionDone"
-                        android:importantForAutofill="no"
-                        android:inputType="textPassword"
-                        android:paddingStart="@dimen/_12sdp"
-                        android:paddingEnd="@dimen/_12sdp"
-                        tools:ignore="RtlSymmetry" />
+                        android:layout_height="wrap_content"
+                        app:hintEnabled="false"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:passwordToggleEnabled="true">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <EditText
+                            android:id="@+id/edt_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_42sdp"
+                            android:background="@drawable/bg_edit_text"
+                            android:drawableStart="@drawable/custom_lock_icon"
+                            android:drawablePadding="@dimen/_10sdp"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:hint="@string/tv_password"
+                            android:imeOptions="actionDone"
+                            android:importantForAutofill="no"
+                            android:inputType="textPassword"
+                            android:paddingStart="@dimen/_12sdp"
+                            android:paddingEnd="@dimen/_12sdp"
+                            tools:ignore="RtlSymmetry" />
 
-                <TextView
-                    android:id="@+id/strength_level_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:fontFamily="@font/open_sans_semibold"
-                    android:gravity="center"
-                    android:textSize="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edt_password_container"
-                    tools:text="test" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                <View
-                    android:id="@+id/strength_level_indicator"
+                    <TextView
+                        android:id="@+id/strength_level_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:gravity="center"
+                        android:textSize="@dimen/_14sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/edt_password_container"
+                        tools:text="test" />
+
+                    <View
+                        android:id="@+id/strength_level_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@color/lightGray"
+                        app:layout_constraintStart_toStartOf="@id/strength_level_txt"
+                        app:layout_constraintTop_toBottomOf="@id/strength_level_txt" />
+
+                    <ImageView
+                        android:id="@+id/lowerCase_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:tint="@color/darkGray"
+                        app:layout_constraintStart_toStartOf="@id/strength_level_txt"
+                        app:layout_constraintTop_toBottomOf="@id/strength_level_txt"
+                        app:srcCompat="@drawable/ic_check_mark" />
+
+                    <TextView
+                        android:id="@+id/lowerCase_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="@string/lowercase_letters"
+                        android:textColor="@color/darkGray"
+                        android:textSize="@dimen/_14sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/lowerCase_img"
+                        app:layout_constraintStart_toEndOf="@+id/lowerCase_img"
+                        app:layout_constraintTop_toTopOf="@+id/lowerCase_img" />
+
+                    <ImageView
+                        android:id="@+id/upperCase_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:tint="@color/darkGray"
+                        app:layout_constraintStart_toStartOf="@+id/lowerCase_img"
+                        app:layout_constraintTop_toBottomOf="@+id/lowerCase_img"
+                        app:srcCompat="@drawable/ic_check_mark" />
+
+                    <TextView
+                        android:id="@+id/upperCase_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="@string/uppercase_letters"
+                        android:textColor="@color/darkGray"
+                        android:textSize="@dimen/_14sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/upperCase_img"
+                        app:layout_constraintStart_toEndOf="@+id/upperCase_img"
+                        app:layout_constraintTop_toTopOf="@+id/upperCase_img" />
+
+                    <ImageView
+                        android:id="@+id/digit_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:tint="@color/darkGray"
+                        app:layout_constraintStart_toStartOf="@+id/upperCase_img"
+                        app:layout_constraintTop_toBottomOf="@+id/upperCase_img"
+                        app:srcCompat="@drawable/ic_check_mark" />
+
+                    <TextView
+                        android:id="@+id/digit_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="@string/digits"
+                        android:textColor="@color/darkGray"
+                        android:textSize="@dimen/_14sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/digit_img"
+                        app:layout_constraintStart_toEndOf="@+id/digit_img"
+                        app:layout_constraintTop_toTopOf="@+id/digit_img" />
+
+                    <ImageView
+                        android:id="@+id/specialChar_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:tint="@color/darkGray"
+                        app:layout_constraintStart_toStartOf="@+id/digit_img"
+                        app:layout_constraintTop_toBottomOf="@+id/digit_img"
+                        app:srcCompat="@drawable/ic_check_mark" />
+
+                    <TextView
+                        android:id="@+id/specialChar_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:text="@string/special_characters"
+                        android:textColor="@color/darkGray"
+                        android:textSize="@dimen/_14sdp"
+                        app:layout_constraintBottom_toBottomOf="@+id/specialChar_img"
+                        app:layout_constraintStart_toEndOf="@+id/specialChar_img"
+                        app:layout_constraintTop_toTopOf="@+id/specialChar_img" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Button
+                    android:id="@+id/btn_create_account"
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="6dp"
-                    android:background="@color/lightGray"
-                    app:layout_constraintStart_toStartOf="@id/strength_level_txt"
-                    app:layout_constraintTop_toBottomOf="@id/strength_level_txt" />
-
-                <ImageView
-                    android:id="@+id/lowerCase_img"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_12sdp"
-                    android:tint="@color/darkGray"
-                    app:layout_constraintStart_toStartOf="@id/strength_level_txt"
-                    app:layout_constraintTop_toBottomOf="@id/strength_level_txt"
-                    app:srcCompat="@drawable/ic_check_mark" />
-
-                <TextView
-                    android:id="@+id/lowerCase_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/open_sans_semibold"
-                    android:text="@string/lowercase_letters"
-                    android:textColor="@color/darkGray"
+                    android:background="@drawable/login_btn_bg"
+                    android:enabled="false"
+                    android:text="@string/btn_create_account"
+                    android:textColor="#FFFFFF"
                     android:textSize="@dimen/_14sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/lowerCase_img"
-                    app:layout_constraintStart_toEndOf="@+id/lowerCase_img"
-                    app:layout_constraintTop_toTopOf="@+id/lowerCase_img" />
-
-                <ImageView
-                    android:id="@+id/upperCase_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:tint="@color/darkGray"
-                    app:layout_constraintStart_toStartOf="@+id/lowerCase_img"
-                    app:layout_constraintTop_toBottomOf="@+id/lowerCase_img"
-                    app:srcCompat="@drawable/ic_check_mark" />
-
-                <TextView
-                    android:id="@+id/upperCase_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/open_sans_semibold"
-                    android:text="@string/uppercase_letters"
-                    android:textColor="@color/darkGray"
-                    android:textSize="@dimen/_14sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/upperCase_img"
-                    app:layout_constraintStart_toEndOf="@+id/upperCase_img"
-                    app:layout_constraintTop_toTopOf="@+id/upperCase_img" />
-
-                <ImageView
-                    android:id="@+id/digit_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:tint="@color/darkGray"
-                    app:layout_constraintStart_toStartOf="@+id/upperCase_img"
-                    app:layout_constraintTop_toBottomOf="@+id/upperCase_img"
-                    app:srcCompat="@drawable/ic_check_mark" />
-
-                <TextView
-                    android:id="@+id/digit_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/open_sans_semibold"
-                    android:text="@string/digits"
-                    android:textColor="@color/darkGray"
-                    android:textSize="@dimen/_14sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/digit_img"
-                    app:layout_constraintStart_toEndOf="@+id/digit_img"
-                    app:layout_constraintTop_toTopOf="@+id/digit_img" />
-
-                <ImageView
-                    android:id="@+id/specialChar_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:tint="@color/darkGray"
-                    app:layout_constraintStart_toStartOf="@+id/digit_img"
-                    app:layout_constraintTop_toBottomOf="@+id/digit_img"
-                    app:srcCompat="@drawable/ic_check_mark" />
-
-                <TextView
-                    android:id="@+id/specialChar_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:fontFamily="@font/open_sans_semibold"
-                    android:text="@string/special_characters"
-                    android:textColor="@color/darkGray"
-                    android:textSize="@dimen/_14sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/specialChar_img"
-                    app:layout_constraintStart_toEndOf="@+id/specialChar_img"
-                    app:layout_constraintTop_toTopOf="@+id/specialChar_img" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Button
-                android:id="@+id/btn_create_account"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:background="@drawable/login_btn_bg"
-                android:text="@string/btn_create_account"
-                android:textColor="#FFFFFF"
-                android:enabled="false"
-                android:textSize="@dimen/_14sdp" />
+                    android:onClick="@{viewModel::onSignUpClick}"/>
 
 
-        </LinearLayout>
+            </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -1,20 +1,23 @@
 package com.example.foodorderingapp.viewmodel;
 
-import android.app.Application;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.example.foodorderingapp.R;
+import com.example.foodorderingapp.models.authentication.UserSignUp;
 import com.example.foodorderingapp.util.StrengthLevel;
+import com.example.foodorderingapp.view.authentication.SignUpFragmentDirections;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SignUpViewModel extends AndroidViewModel implements TextWatcher {
+public class SignUpViewModel extends BaseViewModel implements TextWatcher {
 
     public MutableLiveData<StrengthLevel> strengthLevel = new MutableLiveData<>();
     public MutableLiveData<Integer> strengthColor = new MutableLiveData<>();
@@ -24,12 +27,19 @@ public class SignUpViewModel extends AndroidViewModel implements TextWatcher {
     public MutableLiveData<Integer> digit = new MutableLiveData<>();
     public MutableLiveData<Integer> specialChar = new MutableLiveData<>();
 
-    public SignUpViewModel(@NonNull Application application) {
-        super(application);
+    private UserSignUp mUserSignUp;
+    private SignUpResultCallbacks mSignUpResultCallbacks;
+    private FirebaseAuth mAuth;
+
+    public SignUpViewModel(SignUpResultCallbacks signUpResultCallbacks) {
         lowercase.setValue(0);
         uppercase.setValue(0);
         digit.setValue(0);
         specialChar.setValue(0);
+
+        mUserSignUp = new UserSignUp();
+        mSignUpResultCallbacks = signUpResultCallbacks;
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -59,6 +69,8 @@ public class SignUpViewModel extends AndroidViewModel implements TextWatcher {
             else specialChar.setValue(0);
 
             calculateStrength(charSequence);
+
+            mUserSignUp.setPassword(charSequence.toString());
         }
     }
 
@@ -106,5 +118,59 @@ public class SignUpViewModel extends AndroidViewModel implements TextWatcher {
         Pattern pattern = Pattern.compile("[!@#$%^&*()_=+{}/.<>|\\\\~]");
         Matcher hasSpecialChar = pattern.matcher(charSequence);
         return hasSpecialChar.find();
+    }
+
+    public TextWatcher getNameTextWatcher() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable username) {
+               mUserSignUp.setName(username.toString());
+            }
+        };
+    }
+
+    public TextWatcher getUserNameTextWatcher() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable email) {
+                mUserSignUp.setEmail(email.toString());
+            }
+        };
+    }
+
+    public void onSignUpClick(View view) {
+        int errorCode = mUserSignUp.isValidUser();
+        if (errorCode == 0) mSignUpResultCallbacks.onError("You must fill all of the information");
+        else if (errorCode == 1) mSignUpResultCallbacks.onError("Please fill the valid email");
+        else if (errorCode == 2) mSignUpResultCallbacks.onError("Your password must greater than 6 and should be in medium");
+        else {
+            mAuth.createUserWithEmailAndPassword(mUserSignUp.getEmail(), mUserSignUp.getPassword()).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    mSignUpResultCallbacks.onSuccess("Your account had been created");
+                    NavDirections actionList = SignUpFragmentDirections.actionList();
+                    Navigation.findNavController(view).navigate(actionList);
+                } else mSignUpResultCallbacks.onError("Your account hadn't been created. There had an error, please try again");
+            });
+        }
     }
 }

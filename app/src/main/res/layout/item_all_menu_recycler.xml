@@ -1,105 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_8sdp"
-    android:background="@drawable/recycler_bg2"
-    tools:ignore="ContentDescription">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/all_menu_image"
-        android:layout_width="@dimen/_86sdp"
-        android:layout_height="@dimen/_95sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/popular1" />
+    <data>
 
-    <TextView
-        android:id="@+id/all_menu_name"
-        android:layout_width="wrap_content"
+        <variable
+            name="allmenu"
+            type="com.example.foodorderingapp.models.Allmenu" />
+        <variable
+            name="listener"
+            type="com.example.foodorderingapp.view.recyclerinterface.AllMenuClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:textColor="#000"
-        android:textSize="@dimen/_12sdp"
-        app:layout_constraintStart_toEndOf="@id/all_menu_image"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="TextView" />
+        android:layout_margin="@dimen/_8sdp"
+        android:onClick="@{listener::onMenuClicked}"
+        android:background="@drawable/recycler_bg2"
+        tools:ignore="ContentDescription">
 
-    <TextView
-        android:id="@+id/all_menu_note"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:textColor="#000"
-        android:textSize="@dimen/_12sdp"
-        app:layout_constraintStart_toStartOf="@id/all_menu_name"
-        app:layout_constraintTop_toBottomOf="@id/all_menu_name"
-        tools:text="TextView" />
+        <TextView
+            android:id="@+id/allmenuID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(allmenu.uuid)}"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageRating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_4sdp"
-        app:layout_constraintStart_toStartOf="@+id/all_menu_note"
-        app:layout_constraintTop_toBottomOf="@+id/all_menu_note"
-        app:srcCompat="@drawable/ic_mdi_star_rate" />
+        <ImageView
+            android:id="@+id/all_menu_image"
+            android:layout_width="@dimen/_86sdp"
+            android:layout_height="@dimen/_95sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:imageUrl="@{allmenu.imageUrl}"
+            app:srcCompat="@drawable/popular1" />
 
-    <TextView
-        android:id="@+id/all_menu_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:textSize="@dimen/_10sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageRating"
-        app:layout_constraintStart_toEndOf="@+id/imageRating"
-        app:layout_constraintTop_toTopOf="@+id/imageRating"
-        tools:text="3.9" />
+        <TextView
+            android:id="@+id/all_menu_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="@{allmenu.name}"
+            android:textColor="#000"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintStart_toEndOf="@id/all_menu_image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="TextView" />
 
-    <TextView
-        android:id="@+id/all_menu_delivery_time"
-        android:layout_width="40dp"
-        android:layout_height="15dp"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:background="@drawable/time_bg"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="@dimen/_7sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/all_menu_rating"
-        app:layout_constraintStart_toEndOf="@+id/all_menu_rating"
-        app:layout_constraintTop_toTopOf="@+id/all_menu_rating"
-        tools:text="45 mins" />
+        <TextView
+            android:id="@+id/all_menu_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@{allmenu.note}"
+            android:textColor="#000"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="@id/all_menu_name"
+            app:layout_constraintTop_toBottomOf="@id/all_menu_name"
+            tools:text="TextView" />
 
-    <TextView
-        android:id="@+id/all_menu_delivery_charge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:textColor="#000"
-        android:textSize="@dimen/_10sdp"
-        app:layout_constraintStart_toStartOf="@+id/all_menu_note"
-        app:layout_constraintTop_toBottomOf="@+id/all_menu_rating"
-        tools:text="Free Delivery" />
+        <ImageView
+            android:id="@+id/imageRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:layout_constraintStart_toStartOf="@+id/all_menu_note"
+            app:layout_constraintTop_toBottomOf="@+id/all_menu_note"
+            app:srcCompat="@drawable/ic_mdi_star_rate" />
 
-    <TextView
-        android:id="@+id/all_menu_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:layout_marginBottom="@dimen/_16sdp"
-        android:fontFamily="@font/open_sans_bold"
-        android:textColor="#fff"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="166" />
+        <TextView
+            android:id="@+id/all_menu_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="@{allmenu.rating}"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageRating"
+            app:layout_constraintStart_toEndOf="@+id/imageRating"
+            app:layout_constraintTop_toTopOf="@+id/imageRating"
+            tools:text="3.9" />
+
+        <TextView
+            android:id="@+id/all_menu_delivery_time"
+            android:layout_width="40dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:background="@drawable/time_bg"
+            android:gravity="center"
+            android:text="@{allmenu.deliveryTime}"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/_7sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/all_menu_rating"
+            app:layout_constraintStart_toEndOf="@+id/all_menu_rating"
+            app:layout_constraintTop_toTopOf="@+id/all_menu_rating"
+            tools:text="45 mins" />
+
+        <TextView
+            android:id="@+id/all_menu_delivery_charge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@{allmenu.deliveryCharges}"
+            android:textColor="#000"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="@+id/all_menu_note"
+            app:layout_constraintTop_toBottomOf="@+id/all_menu_rating"
+            tools:text="Free Delivery" />
+
+        <TextView
+            android:id="@+id/all_menu_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="@{allmenu.price}"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="166" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
