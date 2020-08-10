@@ -4,18 +4,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodorderingapp.R;
@@ -23,6 +28,7 @@ import com.example.foodorderingapp.adapters.AllMenuAdapter;
 import com.example.foodorderingapp.adapters.PopularAdapter;
 import com.example.foodorderingapp.adapters.RecommendedAdapter;
 import com.example.foodorderingapp.viewmodel.ListViewModel;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +50,10 @@ public class ListFragment extends Fragment {
     @BindView(R.id.btn_search)
     ImageView mSearch;
 
+    Toolbar mToolbar;
+    DrawerLayout mDrawerLayout;
+    NavigationView mNavigationView;
+
     // Function
     private View view;
     private ListViewModel mListViewModel;
@@ -56,6 +66,9 @@ public class ListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_list, container, false);
+        mToolbar = view.findViewById(R.id.toolbarList);
+        mDrawerLayout = view.findViewById(R.id.drawerLayout);
+        mNavigationView = view.findViewById(R.id.navigation);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -64,6 +77,18 @@ public class ListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mListViewModel = ViewModelProviders.of(this).get(ListViewModel.class);
+
+        if (getActivity() != null) {
+            ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
+            setHasOptionsMenu(true);
+        }
+
+        mToolbar.setNavigationOnClickListener(v -> {
+            mDrawerLayout.openDrawer(GravityCompat.START);
+        });
+
+        NavController navController = Navigation.findNavController(view);
+        NavigationUI.setupWithNavController(mNavigationView,navController);
 
         mSearch.setOnClickListener(v -> {
             NavDirections actionSearch = ListFragmentDirections.actionSearch();

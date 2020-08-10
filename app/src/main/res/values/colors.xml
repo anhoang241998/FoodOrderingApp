@@ -12,4 +12,8 @@
     <color name="medium">#ff8f00</color>
     <color name="strong">#FCCA3F</color>
     <color name="bulletproof">#00c853</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGreen">#32CD32</color>
+    <color name="colorPrimaryText">#212121</color>
 </resources>

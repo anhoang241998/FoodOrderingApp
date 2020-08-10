@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Main">
+        <menu>
+            <item
+                android:id="@+id/listFragment"
+                android:icon="@drawable/ic_list"
+                android:title="Food Menu" />
+
+            <item
+                android:id="@+id/menuCart"
+                android:icon="@drawable/ic_cart"
+                android:title="Your Cart" />
+        </menu>
+    </item>
+
+    <item android:title="Others">
+        <menu>
+
+            <item
+                android:id="@+id/menuAbout"
+                android:icon="@drawable/ic_about"
+                android:title="About" />
+
+            <item
+                android:id="@+id/menuPrivacy"
+                android:icon="@drawable/custom_lock_icon"
+                android:title="Privacy Policy" />
+        </menu>
+
+    </item>
+
+    <item
+        android:id="@+id/menuSignOut"
+        android:icon="@drawable/ic_sign_out"
+        android:title="Log Out" />
+</menu>
