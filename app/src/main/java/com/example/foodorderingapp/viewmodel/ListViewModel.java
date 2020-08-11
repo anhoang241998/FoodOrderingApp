@@ -49,8 +49,6 @@ public class ListViewModel extends AndroidViewModel {
     }
 
     private void fetchFromRemote() {
-
-
         apiInterface = FoodApiService.getRetrofitInstance().create(FoodApi.class);
         Call<List<FoodData>> call = apiInterface.getAllData();
         call.enqueue(new Callback<List<FoodData>>() {
@@ -80,24 +78,20 @@ public class ListViewModel extends AndroidViewModel {
     private void foodsRetrieved(List<Popular> list) {
         foods.setValue(list);
         foodLoadError.setValue(false);
-        //setLoading(false);
     }
 
     private void recommendationsRetrieved(List<Recommended> recommended) {
         recommendations.setValue(recommended);
         foodLoadError.setValue(false);
-        //setLoading(false);
     }
 
     private void allMenuRetrieved(List<Allmenu> allMenuList) {
         allMenu.setValue(allMenuList);
         foodLoadError.setValue(false);
-        //setLoading(false);
     }
 
     private void apiErrors() {
         foodLoadError.setValue(true);
-        //setLoading(false);
     }
 
     @Override

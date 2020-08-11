@@ -19,7 +19,7 @@
         <menu>
 
             <item
-                android:id="@+id/menuAbout"
+                android:id="@+id/aboutFragment"
                 android:icon="@drawable/ic_about"
                 android:title="About" />
 

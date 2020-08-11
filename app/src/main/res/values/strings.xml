@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Foody</string>
+    <string name="app_name1">Foody App</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title">Indonesia Food</string>
@@ -94,4 +95,16 @@ The app does use third party services that may collect information used to ident
     <string name="tv_change1">I may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. I will notify you of any changes by posting the new Privacy Policy on this page.</string>
     <string name="tv_change2">This policy is effective as of 2020–08–16</string>
     <string name="tv_contact">If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at an2419998@gmail.com.</string>
+    <string name="tv_version">Version</string>
+    <string name="tv_version_1_0_0">1.0.0</string>
+    <string name="tv_app_author">App Author</string>
+    <string name="tv_name_author">Nguyen Hoang An</string>
+    <string name="tv_contact_me">Contact Me</string>
+    <string name="tv_contact_me_link1">
+        <a href="https://www.facebook.com/an.nguyenhoang.10">Facebook</a>
+    </string>
+    <string name="tv_contact_me_link2">
+        <a href="https://github.com/anhoang241998">Github</a>
+    </string>
+
 </resources>

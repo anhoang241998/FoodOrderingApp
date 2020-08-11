@@ -29,6 +29,9 @@
         <action
             android:id="@+id/actionPolicy"
             app:destination="@id/privacyPolicyFragment" />
+        <action
+            android:id="@+id/actionAbout"
+            app:destination="@id/aboutFragment" />
 
     </fragment>
     <fragment
@@ -180,4 +183,9 @@
             android:id="@+id/action_privacyPolicyFragment_to_listFragment"
             app:destination="@id/listFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.foodorderingapp.view.others.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>

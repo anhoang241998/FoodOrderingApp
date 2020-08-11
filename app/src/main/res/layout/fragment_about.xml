@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.others.AboutFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_about"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="snap|scroll|enterAlways"
+            app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+            app:title="About" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_260sdp"
+                android:paddingStart="@dimen/_16sdp"
+                android:paddingEnd="@dimen/_16sdp">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name1"
+                    android:textColor="#000"
+                    android:textSize="@dimen/_35sdp" />
+
+                <View
+                    android:id="@+id/supportView"
+                    android:layout_width="@dimen/_85sdp"
+                    android:layout_height="@dimen/_2sdp"
+                    android:layout_below="@id/title"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:background="@color/colorAccent" />
+
+                <TextView
+                    android:id="@+id/version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/supportView"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:text="@string/tv_version"
+                    android:textSize="@dimen/_12sdp" />
+
+                <TextView
+                    android:id="@+id/version_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/version"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="@string/tv_version_1_0_0"
+                    android:textColor="#000"
+                    android:textSize="@dimen/_16sdp" />
+
+                <TextView
+                    android:id="@+id/author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/version_detail"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:text="@string/tv_app_author"
+                    android:textSize="@dimen/_12sdp" />
+
+                <TextView
+                    android:id="@+id/author_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/author"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="@string/tv_name_author"
+                    android:textColor="#000"
+                    android:textSize="@dimen/_16sdp" />
+
+                <TextView
+                    android:id="@+id/contact_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/author_detail"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:text="@string/tv_contact_me"
+                    android:textSize="@dimen/_12sdp" />
+
+                <TextView
+                    android:id="@+id/contact_author_detail1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/contact_author"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="@string/tv_contact_me_link1"
+                    android:textColor="#000"
+                    android:textSize="@dimen/_16sdp" />
+
+                <TextView
+                    android:id="@+id/contact_author_detail2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/contact_author_detail1"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="@string/tv_contact_me_link2"
+                    android:textColor="#000"
+                    android:textSize="@dimen/_16sdp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

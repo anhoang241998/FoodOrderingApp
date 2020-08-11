@@ -2,12 +2,10 @@ package com.example.foodorderingapp.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -29,7 +27,6 @@ import com.example.foodorderingapp.R;
 import com.example.foodorderingapp.adapters.AllMenuAdapter;
 import com.example.foodorderingapp.adapters.PopularAdapter;
 import com.example.foodorderingapp.adapters.RecommendedAdapter;
-import com.example.foodorderingapp.util.LoadingDialog;
 import com.example.foodorderingapp.viewmodel.ListViewModel;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -66,7 +63,6 @@ public class ListFragment extends Fragment {
     private RecommendedAdapter mRecommendedAdapter;
     private AllMenuAdapter mAllMenuAdapter;
     private FirebaseAuth mFirebaseAuth;
-    private LoadingDialog mLoadingDialog;
     private FirebaseUser mFirebaseUser;
 
 
@@ -86,10 +82,10 @@ public class ListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mLoadingDialog = new LoadingDialog(getActivity());
 
 
         mListViewModel = ViewModelProviders.of(this).get(ListViewModel.class);
+        mListViewModel.refresh();
 
         if (getActivity() != null) {
             ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
@@ -141,17 +137,11 @@ public class ListFragment extends Fragment {
                 if (getActivity() != null)
                     getActivity().finish();
 
-
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mListViewModel.refresh();
-    }
 
     private void observeViewModel() {
 
