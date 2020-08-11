@@ -1,7 +1,9 @@
 package com.example.foodorderingapp.view.authentication;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -12,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -21,6 +24,7 @@ import androidx.navigation.Navigation;
 import com.example.foodorderingapp.R;
 import com.example.foodorderingapp.databinding.FragmentLogInBinding;
 import com.example.foodorderingapp.util.LoadingDialog;
+import com.example.foodorderingapp.util.SoftKeyboardUtil;
 import com.example.foodorderingapp.viewmodel.LogInResultCallbacks;
 import com.example.foodorderingapp.viewmodel.LogInViewModel;
 import com.example.foodorderingapp.viewmodel.LogInViewModelFactory;
@@ -36,6 +40,8 @@ public class LogInFragment extends Fragment implements LogInResultCallbacks {
     LogInViewModel mLogInViewModel;
     FragmentLogInBinding mFragmentLogInBinding;
     private LoadingDialog loadingDialog;
+    private SoftKeyboardUtil softKeyboardUtil;
+    NestedScrollView mNestedScrollView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,15 +54,18 @@ public class LogInFragment extends Fragment implements LogInResultCallbacks {
         mEditTextEmail = view.findViewById(R.id.edt_email_login);
         mEditTextPassword = view.findViewById(R.id.edt_password_login);
         mTextInputLayoutLogIn = view.findViewById(R.id.layout_text_input_login);
+        mNestedScrollView = view.findViewById(R.id.nestedScrollView_logIn);
         return view;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mFragmentLogInBinding.setViewModel(ViewModelProviders.of(this, new LogInViewModelFactory(this)).get(LogInViewModel.class));
         mLogInViewModel = ViewModelProviders.of(this).get(LogInViewModel.class);
         loadingDialog = new LoadingDialog(getActivity());
+        softKeyboardUtil = new SoftKeyboardUtil(getActivity());
 
         if (getActivity() != null) {
             ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
@@ -78,6 +87,14 @@ public class LogInFragment extends Fragment implements LogInResultCallbacks {
         });
 
         observeViewModel();
+
+        mNestedScrollView.setOnTouchListener((v, motionEvent) -> {
+            if (motionEvent != null && motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
+                if (getContext() != null)
+                    softKeyboardUtil.hideSoftKeyboardForScrollViews(getContext(), v);
+            }
+            return false;
+        });
     }
 
     @Override
