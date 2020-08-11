@@ -4,6 +4,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
@@ -15,6 +16,8 @@ public class LogInViewModel extends BaseViewModel {
     private User user;
     private LogInResultCallbacks mLogInResultCallbacks;
     private FirebaseAuth mAuth;
+    public MutableLiveData<Boolean> loading = new MutableLiveData<Boolean>();
+
 
     public LogInViewModel(LogInResultCallbacks logInResultCallbacks) {
         mLogInResultCallbacks = logInResultCallbacks;
@@ -66,6 +69,7 @@ public class LogInViewModel extends BaseViewModel {
         else if (errorCode == 1) mLogInResultCallbacks.onError("Your email is invalid");
         else if (errorCode == 2) mLogInResultCallbacks.onError("You must enter password");
         else {
+            loading.setValue(true);
             mAuth.signInWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     mLogInResultCallbacks.onSuccess("Login success");
@@ -74,7 +78,7 @@ public class LogInViewModel extends BaseViewModel {
                 } else {
                     mLogInResultCallbacks.onError("Login fail!");
                 }
-
+                loading.setValue(false);
             });
 
 

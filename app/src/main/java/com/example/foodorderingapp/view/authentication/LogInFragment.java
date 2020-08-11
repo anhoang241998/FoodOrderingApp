@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,16 +20,22 @@ import androidx.navigation.Navigation;
 
 import com.example.foodorderingapp.R;
 import com.example.foodorderingapp.databinding.FragmentLogInBinding;
+import com.example.foodorderingapp.util.LoadingDialog;
 import com.example.foodorderingapp.viewmodel.LogInResultCallbacks;
 import com.example.foodorderingapp.viewmodel.LogInViewModel;
 import com.example.foodorderingapp.viewmodel.LogInViewModelFactory;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class LogInFragment extends Fragment implements LogInResultCallbacks {
 
     Toolbar mToolbar;
     View view;
     TextView btnSignUp, btnForgetPassword;
+    EditText mEditTextEmail, mEditTextPassword;
+    TextInputLayout mTextInputLayoutLogIn;
+    LogInViewModel mLogInViewModel;
     FragmentLogInBinding mFragmentLogInBinding;
+    private LoadingDialog loadingDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +45,9 @@ public class LogInFragment extends Fragment implements LogInResultCallbacks {
         mToolbar = view.findViewById(R.id.toolbar_login);
         btnSignUp = view.findViewById(R.id.tv_sign_up_signInScreen);
         btnForgetPassword = view.findViewById(R.id.tv_forget_pass);
+        mEditTextEmail = view.findViewById(R.id.edt_email_login);
+        mEditTextPassword = view.findViewById(R.id.edt_password_login);
+        mTextInputLayoutLogIn = view.findViewById(R.id.layout_text_input_login);
         return view;
     }
 
@@ -45,6 +55,8 @@ public class LogInFragment extends Fragment implements LogInResultCallbacks {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mFragmentLogInBinding.setViewModel(ViewModelProviders.of(this, new LogInViewModelFactory(this)).get(LogInViewModel.class));
+        mLogInViewModel = ViewModelProviders.of(this).get(LogInViewModel.class);
+        loadingDialog = new LoadingDialog(getActivity());
 
         if (getActivity() != null) {
             ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
@@ -64,6 +76,8 @@ public class LogInFragment extends Fragment implements LogInResultCallbacks {
             NavDirections actionForget = LogInFragmentDirections.actionForget();
             Navigation.findNavController(v).navigate(actionForget);
         });
+
+        observeViewModel();
     }
 
     @Override
@@ -73,6 +87,17 @@ public class LogInFragment extends Fragment implements LogInResultCallbacks {
 
     @Override
     public void onError(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        mEditTextEmail.setError(message);
+        mEditTextPassword.setError(message);
+        mTextInputLayoutLogIn.setPasswordVisibilityToggleEnabled(false);
+    }
+
+    private void observeViewModel() {
+        mLogInViewModel.loading.observe(this, isLoading -> {
+            if (isLoading != null && isLoading instanceof Boolean) {
+                if (isLoading) loadingDialog.startAlertDialog();
+                else loadingDialog.dismissDialog();
+            }
+        });
     }
 }

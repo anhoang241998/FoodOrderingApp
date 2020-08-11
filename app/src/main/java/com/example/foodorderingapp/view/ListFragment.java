@@ -2,15 +2,17 @@ package com.example.foodorderingapp.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -27,8 +29,11 @@ import com.example.foodorderingapp.R;
 import com.example.foodorderingapp.adapters.AllMenuAdapter;
 import com.example.foodorderingapp.adapters.PopularAdapter;
 import com.example.foodorderingapp.adapters.RecommendedAdapter;
+import com.example.foodorderingapp.util.LoadingDialog;
 import com.example.foodorderingapp.viewmodel.ListViewModel;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +41,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ListFragment extends Fragment {
+public class ListFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
 
     // UI
     @BindView(R.id.popular_recycler)
@@ -60,6 +65,9 @@ public class ListFragment extends Fragment {
     private PopularAdapter mPopularAdapter;
     private RecommendedAdapter mRecommendedAdapter;
     private AllMenuAdapter mAllMenuAdapter;
+    private FirebaseAuth mFirebaseAuth;
+    private LoadingDialog mLoadingDialog;
+    private FirebaseUser mFirebaseUser;
 
 
     @Override
@@ -76,6 +84,11 @@ public class ListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mLoadingDialog = new LoadingDialog(getActivity());
+
+
         mListViewModel = ViewModelProviders.of(this).get(ListViewModel.class);
 
         if (getActivity() != null) {
@@ -87,8 +100,14 @@ public class ListFragment extends Fragment {
             mDrawerLayout.openDrawer(GravityCompat.START);
         });
 
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
         NavController navController = Navigation.findNavController(view);
-        NavigationUI.setupWithNavController(mNavigationView,navController);
+        NavigationUI.setupWithNavController(mNavigationView, navController);
+
+        mNavigationView.setNavigationItemSelectedListener(this);
 
         mSearch.setOnClickListener(v -> {
             NavDirections actionSearch = ListFragmentDirections.actionSearch();
@@ -115,8 +134,15 @@ public class ListFragment extends Fragment {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
+
+                if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
+                }
+
                 if (getActivity() != null)
-                getActivity().finish();
+                    getActivity().finish();
+
+
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
@@ -157,5 +183,17 @@ public class ListFragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuSignOut:
+                mFirebaseAuth.signOut();
+                NavDirections action = ListFragmentDirections.actionIntro();
+                Navigation.findNavController(view).navigate(action);
+                Toast.makeText(getContext(), "You'd just log out", Toast.LENGTH_SHORT).show();
+        }
+        return true;
     }
 }

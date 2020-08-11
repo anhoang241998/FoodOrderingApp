@@ -51,5 +51,7 @@
     <string name="tv_btn_ok">OK</string>
     <string name="tv_password_updated">Password Updated</string>
     <string name="tv_password_updated_details">Your password has been updated</string>
-
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="tv_loading">Loading...</string>
 </resources>

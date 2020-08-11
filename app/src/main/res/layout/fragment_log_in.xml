@@ -75,11 +75,13 @@
                     android:importantForAutofill="no"
                     android:inputType="textEmailAddress"
                     android:paddingStart="@dimen/_12sdp"
+                    android:imeOptions="actionNext"
                     android:paddingEnd="@dimen/_12sdp"
                     tools:ignore="RtlSymmetry"
                     app:addTextChangedListener="@{viewModel.getEmailTextWatcher}"/>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_text_input_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_12sdp"
@@ -95,6 +97,7 @@
                         android:drawablePadding="@dimen/_10sdp"
                         android:hint="@string/tv_password"
                         android:importantForAutofill="no"
+                        android:imeOptions="actionDone"
                         android:inputType="textPassword"
                         android:paddingStart="@dimen/_12sdp"
                         android:paddingEnd="@dimen/_12sdp"
