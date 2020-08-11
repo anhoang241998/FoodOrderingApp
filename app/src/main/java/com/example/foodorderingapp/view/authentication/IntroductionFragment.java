@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.example.foodorderingapp.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class IntroductionFragment extends Fragment {
 
@@ -23,6 +25,7 @@ public class IntroductionFragment extends Fragment {
     Button mLoginButton;
     TextView mSignUp;
     View view;
+    FirebaseAuth mFirebaseAuth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,6 +39,13 @@ public class IntroductionFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
+        if (mFirebaseAuth.getCurrentUser() != null) {
+            mFirebaseAuth.signOut();
+            Toast.makeText(getContext(), "You'd just logged out", Toast.LENGTH_SHORT).show();
+        }
 
         mLoginButton.setOnClickListener(v -> {
             NavDirections actionLogin = IntroductionFragmentDirections.actionLogin();

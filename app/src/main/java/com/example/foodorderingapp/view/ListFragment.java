@@ -41,7 +41,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ListFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
+public class ListFragment extends Fragment {
 
     // UI
     @BindView(R.id.popular_recycler)
@@ -107,7 +107,6 @@ public class ListFragment extends Fragment implements NavigationView.OnNavigatio
         NavController navController = Navigation.findNavController(view);
         NavigationUI.setupWithNavController(mNavigationView, navController);
 
-        mNavigationView.setNavigationItemSelectedListener(this);
 
         mSearch.setOnClickListener(v -> {
             NavDirections actionSearch = ListFragmentDirections.actionSearch();
@@ -185,15 +184,4 @@ public class ListFragment extends Fragment implements NavigationView.OnNavigatio
 
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menuSignOut:
-                mFirebaseAuth.signOut();
-                NavDirections action = ListFragmentDirections.actionIntro();
-                Navigation.findNavController(view).navigate(action);
-                Toast.makeText(getContext(), "You'd just log out", Toast.LENGTH_SHORT).show();
-        }
-        return true;
-    }
 }

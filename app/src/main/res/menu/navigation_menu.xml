@@ -24,7 +24,7 @@
                 android:title="About" />
 
             <item
-                android:id="@+id/menuPrivacy"
+                android:id="@+id/privacyPolicyFragment"
                 android:icon="@drawable/custom_lock_icon"
                 android:title="Privacy Policy" />
         </menu>
@@ -32,7 +32,7 @@
     </item>
 
     <item
-        android:id="@+id/menuSignOut"
+        android:id="@+id/introductionFragment"
         android:icon="@drawable/ic_sign_out"
         android:title="Log Out" />
 </menu>

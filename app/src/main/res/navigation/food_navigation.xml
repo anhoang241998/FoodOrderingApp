@@ -26,6 +26,9 @@
         <action
             android:id="@+id/actionIntro"
             app:destination="@id/introductionFragment" />
+        <action
+            android:id="@+id/actionPolicy"
+            app:destination="@id/privacyPolicyFragment" />
 
     </fragment>
     <fragment
@@ -166,6 +169,15 @@
         tools:layout="@layout/fragment_add_to_cart" >
         <action
             android:id="@+id/action_addToCartFragment_to_listFragment2"
+            app:destination="@id/listFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.example.foodorderingapp.view.others.PrivacyPolicyFragment"
+        android:label="fragment_privacy_policy"
+        tools:layout="@layout/fragment_privacy_policy" >
+        <action
+            android:id="@+id/action_privacyPolicyFragment_to_listFragment"
             app:destination="@id/listFragment" />
     </fragment>
 </navigation>
