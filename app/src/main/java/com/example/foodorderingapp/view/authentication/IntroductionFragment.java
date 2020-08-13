@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -24,13 +23,12 @@ public class IntroductionFragment extends Fragment {
     //UI
     Button mLoginButton;
     TextView mSignUp;
-    View view;
     FirebaseAuth mFirebaseAuth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_introdution, container, false);
+        View view = inflater.inflate(R.layout.fragment_introdution, container, false);
         mLoginButton = view.findViewById(R.id.btn_move_login);
         mSignUp = view.findViewById(R.id.tv_sign_up);
         return view;

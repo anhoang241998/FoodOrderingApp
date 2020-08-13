@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.foodorderingapp.models.Allmenu;
@@ -19,6 +20,7 @@ import com.example.foodorderingapp.models.retrofit.FoodApiService;
 import com.example.foodorderingapp.models.room.AllMenuDatabase;
 import com.example.foodorderingapp.models.room.PopularDatabase;
 import com.example.foodorderingapp.models.room.RecommendDatabase;
+import com.example.foodorderingapp.util.Event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,9 @@ public class ListViewModel extends AndroidViewModel {
     public MutableLiveData<List<Recommended>> recommendations = new MutableLiveData<List<Recommended>>();
     public MutableLiveData<List<Allmenu>> allMenu = new MutableLiveData<List<Allmenu>>();
     public MutableLiveData<Boolean> foodLoadError = new MutableLiveData<Boolean>();
+
+    public MutableLiveData<Event<Boolean>> _isProgressEnabled = new MutableLiveData<>();
+    public LiveData<Event<Boolean>> isProgressEnabled = _isProgressEnabled;
 
     private FoodApi apiInterface;
     private AsyncTask<List<Popular>, Void, List<Popular>> insertPopularTask;
@@ -49,6 +54,7 @@ public class ListViewModel extends AndroidViewModel {
     }
 
     private void fetchFromRemote() {
+        _isProgressEnabled.setValue(new Event<>(true));
         apiInterface = FoodApiService.getRetrofitInstance().create(FoodApi.class);
         Call<List<FoodData>> call = apiInterface.getAllData();
         call.enqueue(new Callback<List<FoodData>>() {
@@ -76,6 +82,7 @@ public class ListViewModel extends AndroidViewModel {
     }
 
     private void foodsRetrieved(List<Popular> list) {
+        _isProgressEnabled.setValue(new Event<>(false));
         foods.setValue(list);
         foodLoadError.setValue(false);
     }

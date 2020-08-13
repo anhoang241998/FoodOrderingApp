@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.foodorderingapp.viewmodel.LogInViewModel" />
+            type="com.example.foodorderingapp.viewmodel.authentication.LogInViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

@@ -1,4 +1,4 @@
-package com.example.foodorderingapp.viewmodel;
+package com.example.foodorderingapp.viewmodel.authentication;
 
 public interface LogInResultCallbacks {
     void onSuccess(String message);

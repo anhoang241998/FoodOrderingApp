@@ -23,11 +23,12 @@ import androidx.navigation.Navigation;
 
 import com.example.foodorderingapp.R;
 import com.example.foodorderingapp.databinding.FragmentLogInBinding;
+import com.example.foodorderingapp.util.EventObserver;
 import com.example.foodorderingapp.util.LoadingDialog;
 import com.example.foodorderingapp.util.SoftKeyboardUtil;
-import com.example.foodorderingapp.viewmodel.LogInResultCallbacks;
-import com.example.foodorderingapp.viewmodel.LogInViewModel;
-import com.example.foodorderingapp.viewmodel.LogInViewModelFactory;
+import com.example.foodorderingapp.viewmodel.authentication.LogInResultCallbacks;
+import com.example.foodorderingapp.viewmodel.authentication.LogInViewModel;
+import com.example.foodorderingapp.viewmodel.authentication.LogInViewModelFactory;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LogInFragment extends Fragment implements LogInResultCallbacks {
@@ -110,11 +111,12 @@ public class LogInFragment extends Fragment implements LogInResultCallbacks {
     }
 
     private void observeViewModel() {
-        mLogInViewModel.loading.observe(this, isLoading -> {
-            if (isLoading != null && isLoading instanceof Boolean) {
-                if (isLoading) loadingDialog.startAlertDialog();
-                else loadingDialog.dismissDialog();
+        mLogInViewModel.isProgressEnabled.observe(this, new EventObserver<>(hasEnabled -> {
+            if (hasEnabled) {
+                loadingDialog.startAlertDialog();
+            } else {
+                loadingDialog.dismissDialog();
             }
-        });
+        }));
     }
 }

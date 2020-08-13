@@ -28,7 +28,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="John Doe"
+        android:text="@string/tv_name_author"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/viewSupporter"
         app:layout_constraintStart_toEndOf="@id/imageProfile"/>

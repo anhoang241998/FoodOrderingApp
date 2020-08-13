@@ -1,23 +1,26 @@
-package com.example.foodorderingapp.viewmodel;
+package com.example.foodorderingapp.viewmodel.authentication;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.example.foodorderingapp.models.authentication.User;
+import com.example.foodorderingapp.util.Event;
 import com.example.foodorderingapp.view.authentication.LogInFragmentDirections;
+import com.example.foodorderingapp.viewmodel.BaseViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LogInViewModel extends BaseViewModel {
     private User user;
     private LogInResultCallbacks mLogInResultCallbacks;
     private FirebaseAuth mAuth;
-    public MutableLiveData<Boolean> loading = new MutableLiveData<Boolean>();
-
+    public MutableLiveData<Event<Boolean>> _isProgressEnabled = new MutableLiveData<>();
+    public LiveData<Event<Boolean>> isProgressEnabled = _isProgressEnabled;
 
     public LogInViewModel(LogInResultCallbacks logInResultCallbacks) {
         mLogInResultCallbacks = logInResultCallbacks;
@@ -69,16 +72,17 @@ public class LogInViewModel extends BaseViewModel {
         else if (errorCode == 1) mLogInResultCallbacks.onError("Your email is invalid");
         else if (errorCode == 2) mLogInResultCallbacks.onError("You must enter password");
         else {
-            loading.setValue(true);
+            _isProgressEnabled.setValue(new Event<>(true));
             mAuth.signInWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     mLogInResultCallbacks.onSuccess("Login success");
+                    _isProgressEnabled.setValue(new Event<>(false));
                     NavDirections actionSignIn = LogInFragmentDirections.actionList();
                     Navigation.findNavController(view).navigate(actionSignIn);
                 } else {
+                    _isProgressEnabled.setValue(new Event<>(false));
                     mLogInResultCallbacks.onError("Login fail!");
                 }
-                loading.setValue(false);
             });
 
 

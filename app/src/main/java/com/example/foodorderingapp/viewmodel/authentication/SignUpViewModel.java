@@ -1,17 +1,20 @@
-package com.example.foodorderingapp.viewmodel;
+package com.example.foodorderingapp.viewmodel.authentication;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.example.foodorderingapp.R;
 import com.example.foodorderingapp.models.authentication.UserSignUp;
+import com.example.foodorderingapp.util.Event;
 import com.example.foodorderingapp.util.StrengthLevel;
 import com.example.foodorderingapp.view.authentication.SignUpFragmentDirections;
+import com.example.foodorderingapp.viewmodel.BaseViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Matcher;
@@ -26,6 +29,11 @@ public class SignUpViewModel extends BaseViewModel implements TextWatcher {
     public MutableLiveData<Integer> uppercase = new MutableLiveData<>();
     public MutableLiveData<Integer> digit = new MutableLiveData<>();
     public MutableLiveData<Integer> specialChar = new MutableLiveData<>();
+
+//    public MutableLiveData<Boolean> loading = new MutableLiveData<>();
+
+    private MutableLiveData<Event<Boolean>> _isProgressEnabled = new MutableLiveData<>();
+    public LiveData<Event<Boolean>> isProgressEnabled = _isProgressEnabled;
 
     private UserSignUp mUserSignUp;
     private SignUpResultCallbacks mSignUpResultCallbacks;
@@ -120,7 +128,7 @@ public class SignUpViewModel extends BaseViewModel implements TextWatcher {
         return hasSpecialChar.find();
     }
 
-    public TextWatcher getNameTextWatcher() {
+    public TextWatcher getNameSignUp() {
         return new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -139,7 +147,7 @@ public class SignUpViewModel extends BaseViewModel implements TextWatcher {
         };
     }
 
-    public TextWatcher getUserNameTextWatcher() {
+    public TextWatcher getEmailSignUp() {
         return new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -162,14 +170,21 @@ public class SignUpViewModel extends BaseViewModel implements TextWatcher {
         int errorCode = mUserSignUp.isValidUser();
         if (errorCode == 0) mSignUpResultCallbacks.onError("You must fill all of the information");
         else if (errorCode == 1) mSignUpResultCallbacks.onError("Please fill the valid email");
-        else if (errorCode == 2) mSignUpResultCallbacks.onError("Your password must greater than 6 and should be in medium");
+        else if (errorCode == 2)
+            mSignUpResultCallbacks.onError("Your password must greater than 6 and should be in medium");
         else {
+            _isProgressEnabled.setValue(new Event<>(true));
+//            loading.setValue(true);
             mAuth.createUserWithEmailAndPassword(mUserSignUp.getEmail(), mUserSignUp.getPassword()).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
+                    _isProgressEnabled.setValue(new Event<>(false));
                     mSignUpResultCallbacks.onSuccess("Your account had been created");
-                    NavDirections actionList = SignUpFragmentDirections.actionList();
-                    Navigation.findNavController(view).navigate(actionList);
-                } else mSignUpResultCallbacks.onError("Your account hadn't been created. There had an error, please try again");
+                    NavDirections action = SignUpFragmentDirections.actionSignUpFragmentToConfirmationEmailFragment();
+                    Navigation.findNavController(view).navigate(action);
+                } else {
+                    _isProgressEnabled.setValue(new Event<>(false));
+                    mSignUpResultCallbacks.onError("Your account hadn't been created. There had an error, please try again");
+                }
             });
         }
     }

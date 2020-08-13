@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.foodorderingapp.viewmodel.SignUpViewModel" />
+            type="com.example.foodorderingapp.viewmodel.authentication.SignUpViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -33,6 +33,7 @@
 
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView_sign_up"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:isScrollContainer="false"
@@ -80,8 +81,7 @@
                     android:inputType="text"
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="@dimen/_12sdp"
-                    tools:ignore="RtlSymmetry"
-                    app:addTextChangedListener="@{viewModel.nameTextWatcher}"/>
+                    app:addTextChangedListener="@{viewModel.nameSignUp}" />
 
                 <EditText
                     android:id="@+id/edt_email"
@@ -94,11 +94,10 @@
                     android:hint="@string/tv_hint_email_name"
                     android:imeOptions="actionNext"
                     android:importantForAutofill="no"
-                    android:inputType="text"
+                    android:inputType="textEmailAddress"
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="@dimen/_12sdp"
-                    tools:ignore="RtlSymmetry,TextFields"
-                    app:addTextChangedListener="@{viewModel.userNameTextWatcher}"/>
+                    app:addTextChangedListener="@{viewModel.emailSignUp}" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

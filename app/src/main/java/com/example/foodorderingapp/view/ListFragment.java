@@ -27,6 +27,8 @@ import com.example.foodorderingapp.R;
 import com.example.foodorderingapp.adapters.AllMenuAdapter;
 import com.example.foodorderingapp.adapters.PopularAdapter;
 import com.example.foodorderingapp.adapters.RecommendedAdapter;
+import com.example.foodorderingapp.util.EventObserver;
+import com.example.foodorderingapp.util.LoadingDialog;
 import com.example.foodorderingapp.viewmodel.ListViewModel;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,6 +64,7 @@ public class ListFragment extends Fragment {
     private PopularAdapter mPopularAdapter;
     private RecommendedAdapter mRecommendedAdapter;
     private AllMenuAdapter mAllMenuAdapter;
+    private LoadingDialog mLoadingDialog;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
 
@@ -85,6 +88,7 @@ public class ListFragment extends Fragment {
 
 
         mListViewModel = ViewModelProviders.of(this).get(ListViewModel.class);
+        mLoadingDialog = new LoadingDialog(getActivity());
         mListViewModel.refresh();
 
         if (getActivity() != null) {
@@ -171,6 +175,14 @@ public class ListFragment extends Fragment {
                 listError.setVisibility(isError ? View.VISIBLE : View.GONE);
             }
         });
+
+        mListViewModel.isProgressEnabled.observe(this, new EventObserver<>(hasEnabled ->{
+            if (hasEnabled) {
+                mLoadingDialog.startAlertDialog();
+            } else {
+                mLoadingDialog.dismissDialog();
+            }
+        }));
 
     }
 

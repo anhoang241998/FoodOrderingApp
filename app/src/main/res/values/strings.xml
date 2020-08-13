@@ -106,5 +106,8 @@ The app does use third party services that may collect information used to ident
     <string name="tv_contact_me_link2">
         <a href="https://github.com/anhoang241998">Github</a>
     </string>
+    <string name="tv_verify_your_account">Verify your account</string>
+    <string name="tv_verification_email_details">We will send verification email to your email address</string>
+    <string name="tv_btn_verificaiton">send verification email</string>
 
 </resources>

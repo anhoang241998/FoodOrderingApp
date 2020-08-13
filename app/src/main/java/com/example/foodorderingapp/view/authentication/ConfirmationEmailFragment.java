@@ -7,28 +7,39 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.example.foodorderingapp.R;
-public class ConfirmPasswordUpdatedFragment extends Fragment {
+
+public class ConfirmationEmailFragment extends Fragment {
 
     View view;
-//    Button mButtonLogin;
+    Toolbar mToolbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_confirm_password_updated, container, false);
-//        mButtonLogin = view.findViewById(R.id.btn_log_in_new_password);
+        view = inflater.inflate(R.layout.fragment_confirmation_email, container, false);
+        mToolbar = view.findViewById(R.id.toolbar_confirm_sign_up_updated);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        mButtonLogin.setOnClickListener(v -> {
-//            NavDirections actionLogin = ConfirmPasswordUpdatedFragmentDirections.actionLogin();
-//            Navigation.findNavController(v).navigate(actionLogin);
-//        });
+
+        if (getActivity() != null) {
+            ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
+            setHasOptionsMenu(true);
+        }
+
+        mToolbar.setNavigationOnClickListener(v -> {
+            getActivity().onBackPressed();
+        });
+
     }
+
+
 }

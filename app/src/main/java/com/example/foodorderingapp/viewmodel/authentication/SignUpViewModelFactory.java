@@ -1,4 +1,4 @@
-package com.example.foodorderingapp.viewmodel;
+package com.example.foodorderingapp.viewmodel.authentication;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;

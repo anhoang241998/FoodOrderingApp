@@ -19,6 +19,7 @@ public class UserSignUp {
         this.password = password;
     }
 
+
     @NonNull
     public String getName() {
         return name;
@@ -47,7 +48,7 @@ public class UserSignUp {
     }
 
     public int isValidUser(){
-        if (TextUtils.isEmpty(getName()) || TextUtils.isEmpty(getEmail()) || TextUtils.isEmpty(getPassword())) return 0;
+        if (TextUtils.isEmpty(getName()) && TextUtils.isEmpty(getEmail()) && TextUtils.isEmpty(getPassword())) return 0;
         else if (!Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches()) return 1;
         else if (getPassword().length() < 6) return 2;
         else return -1;
