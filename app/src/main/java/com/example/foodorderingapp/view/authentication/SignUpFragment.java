@@ -45,7 +45,7 @@ public class SignUpFragment extends Fragment implements SignUpResultCallbacks {
     FragmentSignUpBinding mFragmentSignUpBinding;
     SoftKeyboardUtil mSoftKeyboardUtil;
     private LoadingDialog mLoadingDialog;
-//    private static final String TAG = "SignUpFragment";
+
 
     private Integer color = R.color.weak;
     private SignUpViewModel mSignUpViewModel;

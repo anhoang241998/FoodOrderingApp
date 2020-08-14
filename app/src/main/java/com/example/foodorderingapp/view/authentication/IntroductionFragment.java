@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
@@ -21,8 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class IntroductionFragment extends Fragment {
 
     //UI
-    Button mLoginButton;
-    TextView mSignUp;
+    Button mLoginButton, mSignUp;
     FirebaseAuth mFirebaseAuth;
 
     @Override

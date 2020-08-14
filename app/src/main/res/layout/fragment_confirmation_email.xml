@@ -1,84 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.authentication.ConfirmationEmailFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <data>
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_confirm_sign_up_updated"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="enterAlways|scroll|snap"
-            app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
-            app:title="Confirmation" />
+        <variable
+            name="viewModel"
+            type="com.example.foodorderingapp.viewmodel.authentication.ConfirmationEmailViewModel" />
+    </data>
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        tools:context=".view.authentication.ConfirmationEmailFragment">
 
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_confirm_sign_up_updated"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="enterAlways|scroll|snap"
+                app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+                app:title="Confirmation" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            tools:ignore="ContentDescription">
+            android:scrollbars="none"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <nl.dionsegijn.konfetti.KonfettiView
-                android:id="@+id/view_celebrate"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                tools:ignore="ContentDescription">
+
+                <nl.dionsegijn.konfetti.KonfettiView
+                    android:id="@+id/view_celebrate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
 
-            <ImageView
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_80sdp"
-                android:layout_marginTop="@dimen/_60sdp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_email_verified" />
+                <ImageView
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_marginTop="@dimen/_60sdp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_email_verified" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:fontFamily="@font/open_sans_bold"
-                android:text="@string/tv_verify_your_account"
-                android:textAlignment="center"
-                android:textAllCaps="true"
-                android:textColor="#000"
-                android:textSize="@dimen/_35sdp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="@string/tv_verify_your_account"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="@dimen/_35sdp" />
 
-            <TextView
-                android:layout_width="@dimen/_220sdp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:text="@string/tv_verification_email_details"
-                android:textAlignment="center"
-                android:textSize="@dimen/_14sdp" />
+                <TextView
+                    android:layout_width="@dimen/_220sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:text="@string/tv_verification_email_details"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/_14sdp" />
 
-            <Button
-                android:id="@+id/btn_verification_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:background="@drawable/login_btn_bg"
-                android:text="@string/tv_btn_verificaiton"
-                android:textColor="#FFFFFF"
-                android:textSize="@dimen/_14sdp" />
+                <Button
+                    android:id="@+id/btn_verification_email"
+                    style="@style/Button.Primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:onClick="@{viewModel::onSendEmailConfirmation}"
+                    android:text="@string/tv_btn_verificaiton"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/_14sdp" />
 
-        </LinearLayout>
+            </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

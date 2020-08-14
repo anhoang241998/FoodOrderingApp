@@ -4,12 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.foodorderingapp.R;
@@ -19,7 +18,7 @@ import butterknife.ButterKnife;
 
 public class FirstScreenFragment extends Fragment {
     @BindView(R.id.next2)
-    TextView tv_next;
+    Button btn_next;
     private View view;
 
     private ViewPager2 mViewPager;
@@ -37,7 +36,7 @@ public class FirstScreenFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        tv_next.setOnClickListener(v -> {
+        btn_next.setOnClickListener(v -> {
             mViewPager.setCurrentItem(1);
         });
     }

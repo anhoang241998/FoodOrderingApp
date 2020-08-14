@@ -174,7 +174,6 @@ public class SignUpViewModel extends BaseViewModel implements TextWatcher {
             mSignUpResultCallbacks.onError("Your password must greater than 6 and should be in medium");
         else {
             _isProgressEnabled.setValue(new Event<>(true));
-//            loading.setValue(true);
             mAuth.createUserWithEmailAndPassword(mUserSignUp.getEmail(), mUserSignUp.getPassword()).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     _isProgressEnabled.setValue(new Event<>(false));

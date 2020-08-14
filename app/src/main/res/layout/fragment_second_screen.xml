@@ -43,13 +43,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title2" />
 
-    <TextView
+    <Button
         android:id="@+id/next2"
+        style="@style/Button.Primary.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_40sdp"
         android:layout_marginBottom="@dimen/_40sdp"
         android:text="@string/btn_next"
+        android:fontFamily="@font/open_sans_bold"
         android:textColor="#7BCEFF"
         android:textSize="22sp"
         android:textStyle="bold"

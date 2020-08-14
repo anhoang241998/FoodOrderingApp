@@ -26,9 +26,8 @@ public class LoadingDialog {
     }
 
     public void dismissDialog() {
-        if (mDialog != null) {
+        if (mDialog != null)
             mDialog.dismiss();
-        }
     }
 
 }
