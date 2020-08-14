@@ -109,5 +109,8 @@ The app does use third party services that may collect information used to ident
     <string name="tv_verify_your_account">Verify your account</string>
     <string name="tv_verification_email_details">We will send verification email to your email address</string>
     <string name="tv_btn_verificaiton">send verification email</string>
+    <string name="tv_btn_list">Log In</string>
+    <string name="tv_thanks">Please log in again!!!</string>
+    <string name="tv_sucess">Your email need to verified!</string>
 
 </resources>

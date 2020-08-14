@@ -167,6 +167,7 @@ public class SignUpViewModel extends BaseViewModel implements TextWatcher {
     }
 
     public void onSignUpClick(View view) {
+
         int errorCode = mUserSignUp.isValidUser();
         if (errorCode == 0) mSignUpResultCallbacks.onError("You must fill all of the information");
         else if (errorCode == 1) mSignUpResultCallbacks.onError("Please fill the valid email");

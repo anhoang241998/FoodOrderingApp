@@ -42,12 +42,6 @@
                 android:orientation="vertical"
                 tools:ignore="ContentDescription">
 
-                <nl.dionsegijn.konfetti.KonfettiView
-                    android:id="@+id/view_celebrate"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-
                 <ImageView
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"

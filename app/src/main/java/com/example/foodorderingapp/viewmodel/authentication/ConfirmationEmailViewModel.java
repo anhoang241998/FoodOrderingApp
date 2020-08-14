@@ -5,8 +5,11 @@ import android.view.View;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.example.foodorderingapp.util.Event;
+import com.example.foodorderingapp.view.authentication.ConfirmationEmailFragmentDirections;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -29,6 +32,8 @@ public class ConfirmationEmailViewModel extends ViewModel {
             mFirebaseUser.sendEmailVerification().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     mConfirmationEmailCallbacks.onSuccess("Verification email had been sent");
+                    NavDirections action = ConfirmationEmailFragmentDirections.actionSuccess();
+                    Navigation.findNavController(view).navigate(action);
                 } else {
                     mConfirmationEmailCallbacks.onFailure("Email cannot send. Please try again");
                 }

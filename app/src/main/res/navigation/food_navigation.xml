@@ -114,16 +114,21 @@
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" >
         <action
-            android:id="@+id/actionList"
-            app:destination="@id/listFragment"
-            app:popUpTo="@id/logInFragment"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/actionSignUp"
             app:destination="@id/signUpFragment" />
         <action
             android:id="@+id/actionForget"
             app:destination="@id/forgetPasswordFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_successConfirmEmailFragment"
+            app:destination="@id/successConfirmEmailFragment"
+            app:popUpTo="@id/logInFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/actionListr"
+            app:destination="@id/listFragment"
+            app:popUpTo="@id/logInFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -192,9 +197,18 @@
         android:label="fragment_confirmation_email"
         tools:layout="@layout/fragment_confirmation_email" >
         <action
-            android:id="@+id/ationList"
-            app:destination="@id/listFragment"
-            app:popUpTo="@id/confirmationEmailFragment"
+            android:id="@+id/actionSuccess"
+            app:destination="@id/successConfirmEmailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/successConfirmEmailFragment"
+        android:name="com.example.foodorderingapp.view.authentication.SuccessConfirmEmailFragment"
+        android:label="fragment_success_confirm_email"
+        tools:layout="@layout/fragment_success_confirm_email" >
+        <action
+            android:id="@+id/action_successConfirmEmailFragment_to_logInFragment"
+            app:destination="@id/logInFragment"
+            app:popUpTo="@id/successConfirmEmailFragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>

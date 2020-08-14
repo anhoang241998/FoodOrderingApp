@@ -14,11 +14,13 @@ import com.example.foodorderingapp.util.Event;
 import com.example.foodorderingapp.view.authentication.LogInFragmentDirections;
 import com.example.foodorderingapp.viewmodel.BaseViewModel;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LogInViewModel extends BaseViewModel {
     private User user;
     private LogInResultCallbacks mLogInResultCallbacks;
     private FirebaseAuth mAuth;
+    private FirebaseUser mFirebaseUser;
     public MutableLiveData<Event<Boolean>> _isProgressEnabled = new MutableLiveData<>();
     public LiveData<Event<Boolean>> isProgressEnabled = _isProgressEnabled;
 
@@ -26,6 +28,7 @@ public class LogInViewModel extends BaseViewModel {
         mLogInResultCallbacks = logInResultCallbacks;
         user = new User();
         mAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mAuth.getCurrentUser();
     }
 
     public TextWatcher getEmailTextWatcher() {
@@ -77,8 +80,13 @@ public class LogInViewModel extends BaseViewModel {
                 if (task.isSuccessful()) {
                     mLogInResultCallbacks.onSuccess("Login success");
                     _isProgressEnabled.setValue(new Event<>(false));
-                    NavDirections actionSignIn = LogInFragmentDirections.actionList();
-                    Navigation.findNavController(view).navigate(actionSignIn);
+                    if (!mFirebaseUser.isEmailVerified()) {
+                        NavDirections actionRetry = LogInFragmentDirections.actionLogInFragmentToSuccessConfirmEmailFragment();
+                        Navigation.findNavController(view).navigate(actionRetry);
+                    } else {
+                        NavDirections actionList = LogInFragmentDirections.actionListr();
+                        Navigation.findNavController(view).navigate(actionList);
+                    }
                 } else {
                     _isProgressEnabled.setValue(new Event<>(false));
                     mLogInResultCallbacks.onError("Login fail!");
