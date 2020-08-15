@@ -57,6 +57,7 @@ public class ListFragment extends Fragment {
     Toolbar mToolbar;
     DrawerLayout mDrawerLayout;
     NavigationView mNavigationView;
+    private static final String TAG = "BBB";
 
     // Function
     private View view;
@@ -185,5 +186,4 @@ public class ListFragment extends Fragment {
         }));
 
     }
-
 }

@@ -142,7 +142,7 @@ public class SignUpViewModel extends BaseViewModel implements TextWatcher {
 
             @Override
             public void afterTextChanged(Editable username) {
-               mUserSignUp.setName(username.toString());
+                mUserSignUp.setName(username.toString());
             }
         };
     }
@@ -167,9 +167,9 @@ public class SignUpViewModel extends BaseViewModel implements TextWatcher {
     }
 
     public void onSignUpClick(View view) {
-
         int errorCode = mUserSignUp.isValidUser();
-        if (errorCode == 0) mSignUpResultCallbacks.onError("You must fill all of the information");
+        if (errorCode == 0)
+            mSignUpResultCallbacks.onError("You must fill all of the information");
         else if (errorCode == 1) mSignUpResultCallbacks.onError("Please fill the valid email");
         else if (errorCode == 2)
             mSignUpResultCallbacks.onError("Your password must greater than 6 and should be in medium");
@@ -187,5 +187,6 @@ public class SignUpViewModel extends BaseViewModel implements TextWatcher {
                 }
             });
         }
+
     }
 }

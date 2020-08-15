@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 public class UserSignUp {
 
     @NonNull
-    String name, email, password;
+    public String name, email, password;
 
     public UserSignUp() {
     }
@@ -22,6 +22,7 @@ public class UserSignUp {
 
     @NonNull
     public String getName() {
+
         return name;
     }
 

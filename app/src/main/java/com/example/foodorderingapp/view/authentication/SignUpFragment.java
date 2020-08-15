@@ -33,7 +33,7 @@ import com.example.foodorderingapp.viewmodel.authentication.SignUpViewModel;
 import com.example.foodorderingapp.viewmodel.authentication.SignUpViewModelFactory;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class SignUpFragment extends Fragment implements SignUpResultCallbacks {
+public class SignUpFragment extends Fragment implements SignUpResultCallbacks{
     View view, mStrengthLevelIndicator;
     Toolbar mToolbar;
     EditText mName, mEmail, mPassword;
@@ -178,4 +178,6 @@ public class SignUpFragment extends Fragment implements SignUpResultCallbacks {
         mPassword.setError(message);
         mTextInputLayout.setPasswordVisibilityToggleEnabled(false);
     }
+
+
 }

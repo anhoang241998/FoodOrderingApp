@@ -80,6 +80,7 @@ public class LogInViewModel extends BaseViewModel {
                 if (task.isSuccessful()) {
                     mLogInResultCallbacks.onSuccess("Login success");
                     _isProgressEnabled.setValue(new Event<>(false));
+                    mFirebaseUser = mAuth.getCurrentUser();
                     if (mFirebaseUser != null) {
                         if (!mFirebaseUser.isEmailVerified()) {
                             NavDirections actionRetry = LogInFragmentDirections.actionLogInFragmentToSuccessConfirmEmailFragment();
@@ -88,11 +89,11 @@ public class LogInViewModel extends BaseViewModel {
                             NavDirections actionList = LogInFragmentDirections.actionListr();
                             Navigation.findNavController(view).navigate(actionList);
                         }
+                    }
                     } else {
                         _isProgressEnabled.setValue(new Event<>(false));
                         mLogInResultCallbacks.onError("Login fail!");
                     }
-                }
             });
 
 
