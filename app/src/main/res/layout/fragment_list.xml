@@ -21,6 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="#fff"
+                app:menu="@menu/toolbar_search_menu"
                 app:layout_scrollFlags="enterAlways|scroll|snap"
                 app:navigationIcon="@drawable/ic_action_menu"
                 app:title="Food Menu"

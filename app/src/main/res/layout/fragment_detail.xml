@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -93,8 +94,8 @@
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_14sdp"
-                android:background="#0097e6">
+                android:background="#0097e6"
+                android:padding="@dimen/_14sdp">
 
                 <TextView
                     android:id="@+id/name"
@@ -114,8 +115,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_4sdp"
-                    app:layout_constraintStart_toStartOf="parent"
                     android:progressTint="#f1c40f"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/name" />
 
                 <TextView
@@ -153,22 +154,22 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/constraintLayout"
                 android:layout_marginTop="@dimen/_6sdp"
-                android:padding="@dimen/_14sdp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/_14sdp">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:fontFamily="@font/open_sans_bold"
-                    android:text="Description"/>
+                    android:text="Description" />
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans_bold"
                     android:layout_marginTop="@dimen/_6sdp"
+                    android:fontFamily="@font/open_sans_bold"
                     android:text="@string/loremDescription" />
 
             </LinearLayout>
@@ -179,7 +180,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button"
+        android:id="@+id/button_addToCart_Detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_25sdp"

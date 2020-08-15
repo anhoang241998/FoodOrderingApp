@@ -2,6 +2,9 @@ package com.example.foodorderingapp.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -185,5 +188,21 @@ public class ListFragment extends Fragment {
             }
         }));
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.toolbar_search_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_cart:
+                NavDirections actionCart = ListFragmentDirections.actionAddToCart();
+                Navigation.findNavController(view).navigate(actionCart);
+            default: return super.onOptionsItemSelected(item);
+        }
     }
 }

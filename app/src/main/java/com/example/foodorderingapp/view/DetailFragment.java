@@ -22,6 +22,9 @@ import com.example.foodorderingapp.models.Recommended;
 import com.example.foodorderingapp.util.GlideUtil;
 import com.example.foodorderingapp.viewmodel.DetailViewModel;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 public class DetailFragment extends Fragment {
 
@@ -30,6 +33,8 @@ public class DetailFragment extends Fragment {
     private TextView mFoodName, mRating, mFoodPrice;
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private View view;
+    private FloatingActionButton mAddToCart;
+    private Snackbar mSnackBar;
     //    private SimpleSearchView searchView;
     private int mPopularUuid, mRecommendUuid, mAllMenuUuid;
     private DetailViewModel mDetailViewModel;
@@ -44,6 +49,7 @@ public class DetailFragment extends Fragment {
         mImageView = view.findViewById(R.id.foodImage);
         mFoodName = view.findViewById(R.id.name);
         mRating = view.findViewById(R.id.rating);
+        mAddToCart = view.findViewById(R.id.button_addToCart_Detail);
         mFoodPrice = view.findViewById(R.id.price);
 //        searchView = view.findViewById(R.id.searchView);
         return view;
@@ -85,6 +91,11 @@ public class DetailFragment extends Fragment {
         } else if (mAllMenuUuid != 0) {
             observeAllmenuViewModel();
         }
+
+        mAddToCart.setOnClickListener(v -> {
+            mSnackBar = Snackbar.make(v, "Add to cart was successfully", BaseTransientBottomBar.LENGTH_LONG);
+            mSnackBar.show();
+        });
 
         // for creating the palette in collapse toolbar
 //        mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.recommended1);
@@ -140,7 +151,6 @@ public class DetailFragment extends Fragment {
 //    @Override
 //    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 //        inflater.inflate(R.menu.toolbar_search_menu, menu);
-//       setupSearchView(menu);
 //        super.onCreateOptionsMenu(menu, inflater);
 //
 //    }

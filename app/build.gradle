@@ -116,7 +116,7 @@ dependencies {
     compile 'com.makeramen:roundedimageview:2.3.0'
 
     //Leak Canary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 
     //Celebrate library
     implementation 'nl.dionsegijn:konfetti:1.2.2'

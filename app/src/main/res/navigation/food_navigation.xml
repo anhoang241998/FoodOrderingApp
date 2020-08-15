@@ -54,6 +54,9 @@
             android:name="AllMenuUuid"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/actionAddtoCart"
+            app:destination="@id/addToCartFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
