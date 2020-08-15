@@ -17,6 +17,8 @@ import androidx.core.widget.NestedScrollView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.example.foodorderingapp.R;
 import com.example.foodorderingapp.databinding.FragmentForgetPasswordBinding;
@@ -81,6 +83,8 @@ public class ForgetPasswordFragment extends Fragment implements ForgotPasswordCa
     @Override
     public void onSuccess(String message) {
         Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show();
+        NavDirections action = ForgetPasswordFragmentDirections.actionForgetPasswordFragmentToLogInFragment();
+        Navigation.findNavController(view).navigate(action);
     }
 
     @Override

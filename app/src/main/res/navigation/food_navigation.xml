@@ -145,27 +145,7 @@
         android:label="fragment_forget_password"
         tools:layout="@layout/fragment_forget_password" >
         <action
-            android:id="@+id/actionNewPassword"
-            app:destination="@id/newPasswordFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/newPasswordFragment"
-        android:name="com.example.foodorderingapp.view.authentication.NewPasswordFragment"
-        android:label="fragment_new_password"
-        tools:layout="@layout/fragment_new_password" >
-        <action
-            android:id="@+id/actionNewPasswordUpdated"
-            app:destination="@id/confirmPasswordUpdatedFragment"
-            app:popUpTo="@id/newPasswordFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/confirmPasswordUpdatedFragment"
-        android:name="com.example.foodorderingapp.view.authentication.ConfirmPasswordUpdatedFragment"
-        android:label="fragment_confirm_password_updated"
-        tools:layout="@layout/fragment_confirm_password_updated" >
-        <action
-            android:id="@+id/actionLogin"
+            android:id="@+id/action_forgetPasswordFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
     </fragment>
     <fragment

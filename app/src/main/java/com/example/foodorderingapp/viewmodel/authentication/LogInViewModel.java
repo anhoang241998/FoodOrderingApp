@@ -80,16 +80,18 @@ public class LogInViewModel extends BaseViewModel {
                 if (task.isSuccessful()) {
                     mLogInResultCallbacks.onSuccess("Login success");
                     _isProgressEnabled.setValue(new Event<>(false));
-                    if (!mFirebaseUser.isEmailVerified()) {
-                        NavDirections actionRetry = LogInFragmentDirections.actionLogInFragmentToSuccessConfirmEmailFragment();
-                        Navigation.findNavController(view).navigate(actionRetry);
+                    if (mFirebaseUser != null) {
+                        if (!mFirebaseUser.isEmailVerified()) {
+                            NavDirections actionRetry = LogInFragmentDirections.actionLogInFragmentToSuccessConfirmEmailFragment();
+                            Navigation.findNavController(view).navigate(actionRetry);
+                        } else {
+                            NavDirections actionList = LogInFragmentDirections.actionListr();
+                            Navigation.findNavController(view).navigate(actionList);
+                        }
                     } else {
-                        NavDirections actionList = LogInFragmentDirections.actionListr();
-                        Navigation.findNavController(view).navigate(actionList);
+                        _isProgressEnabled.setValue(new Event<>(false));
+                        mLogInResultCallbacks.onError("Login fail!");
                     }
-                } else {
-                    _isProgressEnabled.setValue(new Event<>(false));
-                    mLogInResultCallbacks.onError("Login fail!");
                 }
             });
 
