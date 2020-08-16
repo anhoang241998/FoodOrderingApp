@@ -23,7 +23,6 @@ import com.example.foodorderingapp.util.GlideUtil;
 import com.example.foodorderingapp.viewmodel.DetailViewModel;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 public class DetailFragment extends Fragment {
@@ -92,10 +91,10 @@ public class DetailFragment extends Fragment {
             observeAllmenuViewModel();
         }
 
-        mAddToCart.setOnClickListener(v -> {
-            mSnackBar = Snackbar.make(v, "Add to cart was successfully", BaseTransientBottomBar.LENGTH_LONG);
-            mSnackBar.show();
-        });
+//        mAddToCart.setOnClickListener(v -> {
+//            mSnackBar = Snackbar.make(v, "Add to cart was successfully", BaseTransientBottomBar.LENGTH_LONG);
+//            mSnackBar.show();
+//        });
 
         // for creating the palette in collapse toolbar
 //        mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.recommended1);
